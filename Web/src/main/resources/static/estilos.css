@@ -1,0 +1,385 @@
+/*
+   KAIROS LUXE — Hoja de estilos principal
+   Paleta:
+     Fondo:        #f8f8f8 (blanco grisáceo)
+     Texto:        #1a1a1a (negro suave)
+     Acento:       #0d2b45 (azul marino oscuro)
+     Secundario:   #6c757d (gris medio)
+     Separadores:  #e0e0e0 (gris claro)
+   Tipografía:
+     Títulos:      Playfair Display
+     Cuerpo:       Lato
+   */
+
+
+/*
+   VARIABLES CSS GLOBALES
+ */
+:root {
+    --color-fondo:        #f8f8f8;
+    --color-blanco:       #ffffff;
+    --color-texto:        #1a1a1a;
+    --color-acento:       #0d2b45;
+    --color-secundario:   #6c757d;
+    --color-separador:    #e0e0e0;
+
+    --fuente-titulo:      'Playfair Display', Georgia, serif;
+    --fuente-cuerpo:      'Lato', Arial, sans-serif;
+
+    --sombra-navbar:      0 2px 8px rgba(0, 0, 0, 0.08);
+    --transicion:         all 0.25s ease;
+}
+
+
+/*
+    ESTILOS BASE
+ */
+body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: var(--fuente-cuerpo);
+    font-size: 16px;
+    line-height: 1.7;
+    /* Permite que el footer siempre quede abajo */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    /* Ocupa todo el espacio disponible entre navbar y footer */
+    flex: 1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--fuente-titulo);
+    color: var(--color-texto);
+    font-weight: 600;
+}
+
+a {
+    color: var(--color-acento);
+    text-decoration: none;
+    transition: var(--transicion);
+}
+
+a:hover {
+    color: var(--color-acento);
+    opacity: 0.75;
+}
+
+
+/*
+   BARRA DE NAVEGACIÓN (NAVBAR)
+ */
+.navbar-kairos {
+    background-color: var(--color-blanco);
+    box-shadow: var(--sombra-navbar);
+    padding: 1rem 0;
+}
+
+/* Enlace del logo */
+.navbar-kairos .navbar-brand {
+    padding: 0;
+}
+
+/* Enlaces del menú */
+.navbar-kairos .nav-link {
+    font-family: var(--fuente-cuerpo);
+    font-weight: 400;
+    font-size: 0.95rem;
+    color: var(--color-texto);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 0.5rem 0.75rem;
+    transition: var(--transicion);
+    position: relative;
+}
+
+/* Hover: texto en azul marino */
+.navbar-kairos .nav-link:hover {
+    color: var(--color-acento);
+}
+
+/* Enlace activo: texto en azul marino + línea inferior */
+.navbar-kairos .nav-link.activo {
+    color: var(--color-acento);
+    font-weight: 700;
+}
+
+.navbar-kairos .nav-link.activo::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0.75rem;
+    right: 0.75rem;
+    height: 2px;
+    background-color: var(--color-acento);
+    border-radius: 2px;
+}
+
+/* Botón hamburguesa en móvil */
+.navbar-kairos .navbar-toggler {
+    border: 1px solid var(--color-separador);
+    padding: 0.4rem 0.6rem;
+}
+
+.navbar-kairos .navbar-toggler:focus {
+    box-shadow: none;
+}
+
+
+/*
+   BOTONES
+ */
+
+/* Botón principal: fondo azul marino, texto blanco */
+.btn-kairos {
+    background-color: var(--color-acento);
+    color: var(--color-blanco);
+    font-family: var(--fuente-cuerpo);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 0.65rem 1.75rem;
+    border: 2px solid var(--color-acento);
+    border-radius: 0;
+    transition: var(--transicion);
+}
+
+.btn-kairos:hover {
+    background-color: transparent;
+    color: var(--color-acento);
+}
+
+/* Botón secundario: borde azul marino, fondo transparente */
+.btn-kairos-outline {
+    background-color: transparent;
+    color: var(--color-acento);
+    font-family: var(--fuente-cuerpo);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 0.65rem 1.75rem;
+    border: 2px solid var(--color-acento);
+    border-radius: 0;
+    transition: var(--transicion);
+}
+
+.btn-kairos-outline:hover {
+    background-color: var(--color-acento);
+    color: var(--color-blanco);
+}
+
+
+/*
+   TARJETAS DE CATEGORÍA
+ */
+.tarjeta-categoria {
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-separador);
+    border-radius: 0;
+    overflow: hidden;
+    transition: var(--transicion);
+}
+
+.tarjeta-categoria:hover {
+    box-shadow: 0 8px 24px rgba(13, 43, 69, 0.12);
+    transform: translateY(-4px);
+}
+
+.tarjeta-categoria img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: var(--transicion);
+}
+
+.tarjeta-categoria:hover img {
+    transform: scale(1.03);
+}
+
+.tarjeta-categoria .tarjeta-cuerpo {
+    padding: 1.25rem;
+}
+
+.tarjeta-categoria .tarjeta-titulo {
+    font-family: var(--fuente-titulo);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-texto);
+    margin-bottom: 0.5rem;
+}
+
+.tarjeta-categoria .tarjeta-descripcion {
+    font-size: 0.9rem;
+    color: var(--color-secundario);
+    margin-bottom: 1rem;
+}
+
+
+/*
+   SECCIÓN HERO (PÁGINA PRINCIPAL)
+  */
+.hero {
+    background-color: var(--color-acento);
+    color: var(--color-blanco);
+    padding: 6rem 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-family: var(--fuente-titulo);
+    font-size: 3rem;
+    color: var(--color-blanco);
+    margin-bottom: 1rem;
+    letter-spacing: 0.02em;
+}
+
+.hero p {
+    font-size: 1.15rem;
+    opacity: 0.85;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+
+/*
+   SECCIONES GENÉRICAS
+  */
+.seccion {
+    padding: 5rem 0;
+}
+
+.seccion-titulo {
+    font-family: var(--fuente-titulo);
+    font-size: 2rem;
+    color: var(--color-texto);
+    margin-bottom: 0.5rem;
+}
+
+.seccion-subtitulo {
+    color: var(--color-secundario);
+    font-size: 1rem;
+    margin-bottom: 3rem;
+}
+
+/* Línea decorativa bajo títulos de sección */
+.seccion-titulo::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 2px;
+    background-color: var(--color-acento);
+    margin: 0.75rem auto 0;
+}
+
+
+/*
+   PIE DE PÁGINA (FOOTER)
+   */
+.footer-kairos {
+    background-color: var(--color-blanco);
+    border-top: 1px solid var(--color-separador);
+}
+
+.footer-titulo {
+    font-family: var(--fuente-titulo);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-texto);
+}
+
+.footer-texto {
+    font-size: 0.9rem;
+    color: var(--color-secundario);
+    line-height: 1.9;
+}
+
+.footer-enlaces {
+    font-size: 0.9rem;
+    line-height: 2;
+}
+
+.footer-enlaces a {
+    color: var(--color-secundario);
+    transition: var(--transicion);
+}
+
+.footer-enlaces a:hover {
+    color: var(--color-acento);
+    padding-left: 4px;
+}
+
+.footer-separador {
+    border-color: var(--color-separador);
+}
+
+.footer-copyright {
+    font-size: 0.82rem;
+    color: var(--color-secundario);
+}
+
+.footer-copyright a {
+    color: var(--color-secundario);
+}
+
+.footer-copyright a:hover {
+    color: var(--color-acento);
+}
+
+
+/*
+   PÁGINA DE DETALLE DE CATEGORÍA
+  */
+.detalle-categoria-imagen {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.detalle-categoria-titulo {
+    font-family: var(--fuente-titulo);
+    font-size: 2.5rem;
+    color: var(--color-texto);
+    margin-bottom: 1rem;
+}
+
+.detalle-categoria-descripcion {
+    font-size: 1.05rem;
+    color: var(--color-secundario);
+    line-height: 1.8;
+}
+
+
+/*
+   UTILIDADES
+ */
+
+/* Separador decorativo */
+.separador-kairos {
+    border: none;
+    border-top: 1px solid var(--color-separador);
+    margin: 2rem 0;
+}
+
+/* Texto en color acento */
+.texto-acento {
+    color: var(--color-acento);
+}
+
+/* Badge de categoría */
+.badge-kairos {
+    background-color: var(--color-acento);
+    color: var(--color-blanco);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.75rem;
+    border-radius: 0;
+}
