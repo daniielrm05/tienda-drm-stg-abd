@@ -1,21 +1,73 @@
 package es.iesclaradelrey.da2d1a.tiendadrmstgadb.entitie;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Define las categorías principales de la tienda de relojes.
  */
-@Getter
-public enum CategoriaReloj {
-    ELEGANTE("Elegante y Formal"),
-    DEPORTE("Deportivo y Resistente"),
-    SMARTWATCH("Reloj Inteligente"),
-    CASUAL("Uso Diario"),
-    COLECCIONISTA("Edición Limitada");
 
-    private final String nombreVisible;
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class CategoriaReloj {
+    private Long id;
+    private String nombre;
+    private String descripcion;
+    private String imagen;
+/*
+    // Constructor vacío
+    public CategoriaReloj() {}
 
-    CategoriaReloj(String nombreVisible) {
-        this.nombreVisible = nombreVisible;
+    // Constructor con parámetros (te servirá para el CommandLineRunner)
+    public CategoriaReloj(Long id, String nombre, String descripcion, String imagen) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.imagen = imagen;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    @Override
+    public String toString() {
+        return "CategoriaReloj{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", imagen='" + imagen + '\'' +
+                '}';
+    }
+ */
 }
