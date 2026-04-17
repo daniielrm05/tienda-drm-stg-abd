@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nuestras Categorías de Relojes</title>
+</head>
+<body>
+
+<header>
+    <h1>Tienda de Relojes DRMSTGADB</h1>
+</header>
+
+<main>
+    <h2>Explora nuestras categorías</h2>
+
+    <div class="contenedor-categorias">
+        <div th:each="cat : ${categorias}" class="card">
+            <h3 th:text="${cat.nombre}">Nombre</h3>
+
+            <img th:src="${cat.imagen != null}
+                            ? @{/imagenes/categorias/{img}(img=${cat.imagen})}
+                            : @{/imagenes/categorias/no-image.png}"
+                 alt="Reloj" width="200">
+
+            <p th:text="${cat.descripcion}">Descripción</p>
+
+            <a th:href="@{/categorias/{id}(id=${cat.id})}">Ver más</a>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2026 Tienda de Relojes</p>
+</footer>
+
+</body>
+</html>
