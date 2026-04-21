@@ -1,8 +1,11 @@
 package es.iesclaradelrey.da2d1a.tiendadrmstgabd.tiendadrmstgabdweb;
 
-import es.iesclaradelrey.da2d1a.tiendadrmstgadb.entitie.CategoriaReloj;
+import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entitie.CategoriaReloj;
+import es.iesclaradelrey.da2d1a.tiendadrmstgabd.service.CategoriaRelojService;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DataLoader implements CommandLineRunner {
 
     private final CategoriaRelojService categoriaService;

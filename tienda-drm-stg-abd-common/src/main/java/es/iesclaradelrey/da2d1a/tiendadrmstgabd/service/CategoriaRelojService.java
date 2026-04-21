@@ -1,6 +1,6 @@
-package es.iesclaradelrey.da2d1a.tiendadrmstgadb.service;
+package es.iesclaradelrey.da2d1a.tiendadrmstgabd.service;
 
-import es.iesclaradelrey.da2d1a.tiendadrmstgadb.entitie.CategoriaReloj;
+import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entitie.CategoriaReloj;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -12,4 +12,6 @@ import java.util.Optional;
 public interface CategoriaRelojService {
     Collection<CategoriaReloj> buscarTodo();
     Optional<CategoriaReloj> buscarPorId(Long id);
+    void guardar(CategoriaReloj categoria);
+    void eliminar(Long id);
 }

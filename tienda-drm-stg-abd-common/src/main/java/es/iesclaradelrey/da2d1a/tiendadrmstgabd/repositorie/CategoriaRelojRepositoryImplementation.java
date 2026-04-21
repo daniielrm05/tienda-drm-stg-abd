@@ -1,6 +1,6 @@
-package es.iesclaradelrey.da2d1a.tiendadrmstgadb.repositorie;
+package es.iesclaradelrey.da2d1a.tiendadrmstgabd.repositorie;
 
-import es.iesclaradelrey.da2d1a.tiendadrmstgadb.entitie.CategoriaReloj;
+import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entitie.CategoriaReloj;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;

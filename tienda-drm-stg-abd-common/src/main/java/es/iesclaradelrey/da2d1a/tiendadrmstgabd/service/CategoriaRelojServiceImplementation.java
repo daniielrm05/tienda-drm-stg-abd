@@ -1,7 +1,7 @@
-package es.iesclaradelrey.da2d1a.tiendadrmstgadb.service;
+package es.iesclaradelrey.da2d1a.tiendadrmstgabd.service;
 
-import es.iesclaradelrey.da2d1a.tiendadrmstgadb.entitie.CategoriaReloj;
-import es.iesclaradelrey.da2d1a.tiendadrmstgadb.repositorie.CategoriaRelojRepository;
+import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entitie.CategoriaReloj;
+import es.iesclaradelrey.da2d1a.tiendadrmstgabd.repositorie.CategoriaRelojRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -30,6 +30,16 @@ public class CategoriaRelojServiceImplementation implements CategoriaRelojServic
     @Override
     public Optional<CategoriaReloj> buscarPorId(Long id) {
         return repository.buscarPorId(id);
+    }
+
+    @Override
+    public void guardar(CategoriaReloj categoria) {
+        repository.guardar(categoria);
+    }
+
+    @Override
+    public void eliminar(Long id) {
+        repository.eliminar(id);
     }
 
 }

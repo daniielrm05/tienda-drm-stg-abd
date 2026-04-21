@@ -9,7 +9,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>es.iesclaradelrey.da2d1a.tienda-drm-stg-adb</groupId>
+    <groupId>es.iesclaradelrey.da2d1a.tienda-drm-stg-abd</groupId>
     <artifactId>tienda-drm-stg-abd-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
