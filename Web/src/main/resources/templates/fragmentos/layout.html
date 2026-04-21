@@ -33,11 +33,10 @@
     <div class="container">
 
         <!--- Logo de la tienda (MIRAR DONDE METER EL LOGO)-->
-        <!-- AUN POR PONER -->
         <a class="navbar-brand" th:href="@{/}">
-            <img src=""
-            alt="Kairos Luxe"
-            height="50">
+            <img th:src="@{/imagenes/Logo_Transparente.png}"
+                 alt="Kairos Luxe"
+                 height="120">
         </a>
 
         <!-- Boton hamburguesa (para uso en movil)-->
@@ -56,22 +55,18 @@
             <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
 
                 <!-- Inicio -->
-                <li class="nav-item">
-                    <a class="nav-link"
-                       th:href="@{/}"
-                       th:classappend="${#request.requestURI == '/'} ? ' activo' : ''">
-                        Inicio
-                    </a>
-                </li>
+                <a class="nav-link"
+                   th:href="@{/}"
+                   th:classappend="${requestURI == '/'} ? ' activo' : ''">
+                    Inicio
+                </a>
 
                 <!-- Categorías -->
-                <li class="nav-item">
-                    <a class="nav-link"
-                       th:href="@{/categorias}"
-                       th:classappend="${#request.requestURI.contains('/categorias')} ? ' activo' : ''">
-                        Categorías
-                    </a>
-                </li>
+                <a class="nav-link"
+                   th:href="@{/categorias}"
+                   th:classappend="${requestURI != null and #strings.contains(requestURI, '/categorias')} ? ' activo' : ''">
+                    Categorías
+                </a>
 
                 <!-- Sobre nosotros-->
                 <!-- Al ser contenido estático no usa th:href sino href normal -->
@@ -108,20 +103,19 @@
         <div class="row gy-4">
 
             <!-- Columna logo y descripción -->
-            <!-- PENDIENTE DE URL -->
             <div class="col-12 col-md-4">
-                <img th:src="@{}"
+                <img th:src="@{/imagenes/Logo_Transparente.png}"
                      alt="Kairos Luxe"
-                     height="40"
-                     class="mb-3"/>
-                <p class="footer-texto">
+                     height="70"
+                     class="mb-2 d-block"/>
+                <p class="footer-texto mb-0">
                     Relojes de alta relojería para quienes aprecian el tiempo como arte.
                     Kairos Luxe, el momento preciso.
                 </p>
             </div>
 
             <!-- Columna información -->
-            <div class="col-6 col-md-2">
+            <div class="col-6 col-md-4">
                 <h6 class="footer-titulo mb-3">Información</h6>
                 <ul class="list-unstyled footer-enlaces">
                     <li><a th:href="@{/sobre-nosotros.html}">Sobre nosotros</a></li>
@@ -130,7 +124,7 @@
             </div>
 
             <!-- Columna contacto -->
-            <div class="col-12 col-md-2">
+            <div class="col-12 col-md-4">
                 <h6 class="footer-titulo mb-3">Contacto</h6>
                 <ul class="list-unstyled footer-texto">
                     <li><i class="bi bi-envelope me-2"></i>info@kairosluxe.es</li>
