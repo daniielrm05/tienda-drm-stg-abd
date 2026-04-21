@@ -26,7 +26,7 @@
 
     <!--
     FRAGMENTO: Menu de navegación (navbar)
-    Copia y pega para su uso: <nav th:replace="~{fragments/layout :: navbar}"></nav>
+    Copia y pega para su uso: <nav th:replace="~{fragmentos/layout :: navbar}"></nav>
     -->
 
 <nav class="navbar navbar-expand-lg navbar-kairos" th:fragment="navbar">
@@ -59,7 +59,7 @@
                 <li class="nav-item">
                     <a class="nav-link"
                        th:href="@{/}"
-                       th:classappend="${#request.requestURI == '/'} ? ' activo' : ''"> <!--QUE ES ESTO-->
+                       th:classappend="${#request.requestURI == '/'} ? ' activo' : ''">
                         Inicio
                     </a>
                 </li>
@@ -99,7 +99,7 @@
 
     <!--
      FRAGMENTO: footer
-     Copia y pega para su uso: <footer th:replace="~{fragments/layout :: footer}"></footer>
+     Copia y pega para su uso: <footer th:replace="~{fragmentos/layout :: footer}"></footer>
      -->
 
 <footer class="footer-kairos mt-auto py-5" th:fragment="footer">
