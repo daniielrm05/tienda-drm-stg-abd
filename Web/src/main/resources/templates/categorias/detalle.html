@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragmentos/layout :: cabeceraComun('Detalle de ' + ${categoria.nombre})}">
+</head>
+<body class="d-flex flex-column h-100">
+
+<nav th:replace="~{/fragmentos/layout :: navbar}"></nav>
+
+<main class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+            <img th:src="@{/imagenes/categorias/{img}(img=${categoria.imagen != null ? categoria.imagen : 'no-image.jpg'})}"
+                 class="img-fluid rounded shadow" alt="Reloj">
+        </div>
+        <div class="col-md-6">
+            <h1 th:text="${categoria.nombre}">Nombre</h1>
+            <p class="lead" th:text="${categoria.descripcion}">Descripción</p>
+            <a th:href="@{/categorias}" class="btn btn-outline-primary">Volver al listado</a>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="~{/fragmentos/layout :: footer}"></footer>
+
+<!-- Scripts Bootstrap -->
+<div th:replace="~{fragmentos/layout :: scriptsComunes}"></div>
+</body>
+</html>

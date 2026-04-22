@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Incluye el head común con título "Inicio" -->
+<head th:replace="~{fragmentos/layout :: cabeceraComun('Inicio')}">
+    <title>Inicio</title>
+</head>
+
+<body>
+
+<!-- Barra de navegación común -->
+<nav th:replace="~{fragmentos/layout :: navbar}"></nav>
+
+<main>
+
+    <!-- ==========================================
+         SECCIÓN HERO
+         Imagen de fondo oscura con título y botón
+         ========================================== -->
+    <section class="hero">
+        <div class="container">
+            <p class="text-uppercase letra-espaciada mb-3" style="letter-spacing: 0.2em; font-size: 0.85rem; opacity: 0.7;">
+                Alta relojería
+            </p>
+            <h1>El tiempo, convertido en arte</h1>
+            <p>
+                Descubre nuestra colección de relojes de lujo. Cada pieza,
+                una obra maestra de precisión y elegancia.
+            </p>
+            <a th:href="@{/categorias}" class="btn-kairos">
+                Ver colección
+            </a>
+        </div>
+    </section>
+
+
+    <!-- ==========================================
+         SECCIÓN CATEGORÍAS
+         Muestra las categorías de forma estática de momento.
+         (Cuando el Dani termine el CommandLineRunner,
+         se sustituirá por th:each dinámico)
+         ========================================== -->
+    <section class="seccion">
+        <div class="container">
+
+            <!-- Título de sección -->
+            <div class="text-center mb-5">
+                <h2 class="seccion-titulo">Nuestras colecciones</h2>
+                <p class="seccion-subtitulo">Encuentra el reloj que mejor define tu estilo</p>
+            </div>
+
+            <!-- Tarjetas de categorías (estáticas de momento) -->
+            <div class="row g-4">
+
+                <!-- Categoría 1 -->
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <a th:href="@{/categorias}" class="text-decoration-none">
+                        <div class="tarjeta-categoria">
+                            <img th:src="@{/imagenes/categorias/casual.jpg}"
+                                 alt="Relojes Clásicos"  style="object-fit: contain;"/>
+                            <div class="tarjeta-cuerpo">
+                                <h3 class="tarjeta-titulo">Relojes Clásicos</h3>
+                                <p class="tarjeta-descripcion">
+                                    Elegancia atemporal para cualquier ocasión.
+                                </p>
+                                <span class="texto-acento" style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+                                    Ver colección <i class="bi bi-arrow-right ms-1"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Categoría 2 -->
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <a th:href="@{/categorias}" class="text-decoration-none">
+                        <div class="tarjeta-categoria">
+                            <img th:src="@{/imagenes/categorias/deportivo.jpg}"
+                                 alt="Relojes Deportivos" style="object-fit: contain;"/>
+                            <div class="tarjeta-cuerpo">
+                                <h3 class="tarjeta-titulo">Relojes Deportivos</h3>
+                                <p class="tarjeta-descripcion">
+                                    Resistentes y funcionales para el deporte.
+                                </p>
+                                <span class="texto-acento" style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+                                    Ver colección <i class="bi bi-arrow-right ms-1"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Categoría 3 -->
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <a th:href="@{/categorias}" class="text-decoration-none">
+                        <div class="tarjeta-categoria">
+                            <img th:src="@{/imagenes/categorias/smartwatch.jpg}"
+                                 alt="Relojes Inteligentes"  style="object-fit: contain;"/>
+                            <div class="tarjeta-cuerpo">
+                                <h3 class="tarjeta-titulo">Relojes Inteligentes</h3>
+                                <p class="tarjeta-descripcion">
+                                    Tecnología de vanguardia en tu muñeca.
+                                </p>
+                                <span class="texto-acento" style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+                                    Ver colección <i class="bi bi-arrow-right ms-1"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Botón ver todas las categorías -->
+            <div class="text-center mt-5">
+                <a th:href="@{/categorias}" class="btn-kairos-outline">
+                    Ver todas las colecciones
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ==========================================
+         SECCIÓN "POR QUÉ KAIROS LUXE"
+         Tres valores de la marca en columnas
+         ========================================== -->
+    <section class="seccion" style="background-color: var(--color-blanco);">
+        <div class="container">
+
+            <div class="text-center mb-5">
+                <h2 class="seccion-titulo">Por qué Kairos Luxe</h2>
+                <p class="seccion-subtitulo">Nuestra filosofía, nuestra promesa</p>
+            </div>
+
+            <div class="row g-4 text-center">
+
+                <!-- Valor 1 -->
+                <div class="col-12 col-md-4">
+                    <i class="bi bi-award mb-3 d-block texto-acento" style="font-size: 2.5rem;"></i>
+                    <h4 style="font-family: var(--fuente-titulo);">Calidad certificada</h4>
+                    <p style="color: var(--color-secundario); font-size: 0.95rem;">
+                        Cada reloj pasa por un riguroso control de calidad antes
+                        de llegar a tus manos.
+                    </p>
+                </div>
+
+                <!-- Valor 2 -->
+                <div class="col-12 col-md-4">
+                    <i class="bi bi-shield-check mb-3 d-block texto-acento" style="font-size: 2.5rem;"></i>
+                    <h4 style="font-family: var(--fuente-titulo);">Garantía de por vida</h4>
+                    <p style="color: var(--color-secundario); font-size: 0.95rem;">
+                        Respaldamos cada pieza con garantía extendida y
+                        servicio técnico especializado.
+                    </p>
+                </div>
+
+                <!-- Valor 3 -->
+                <div class="col-12 col-md-4">
+                    <i class="bi bi-truck mb-3 d-block texto-acento" style="font-size: 2.5rem;"></i>
+                    <h4 style="font-family: var(--fuente-titulo);">Envío seguro</h4>
+                    <p style="color: var(--color-secundario); font-size: 0.95rem;">
+                        Entrega asegurada en packaging de lujo,
+                        directamente a tu domicilio.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- Pie de página común -->
+<footer th:replace="~{fragmentos/layout :: footer}"></footer>
+
+<!-- Scripts Bootstrap -->
+<div th:replace="~{fragmentos/layout :: scriptsComunes}"></div>
+
+</body>
+</html>

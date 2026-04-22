@@ -10,7 +10,7 @@
     </parent>
     <groupId>es.iesclaradelrey.da2d1a.tienda-drm-stg-abd</groupId>
     <artifactId>tienda-drm-stg-abd-web</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>Web</name>
     <description>Web</description>
     <url/>
@@ -61,9 +61,16 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>es.iesclaradelrey.da2d1a.tienda-drm-stg-adb</groupId>
+            <groupId>es.iesclaradelrey.da2d1a.tienda-drm-stg-abd</groupId>
             <artifactId>tienda-drm-stg-abd-common</artifactId>
             <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Base de datos H2 en memoria para desarrollo (LUEGO BORRAR)-->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 

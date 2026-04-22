@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>es.iesclaradelrey.da2d1a.tienda-drm-stg-adb</groupId>
+        <groupId>es.iesclaradelrey.da2d1a.tienda-drm-stg-abd</groupId>
         <artifactId>tienda-drm-stg-abd-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
@@ -23,10 +23,6 @@
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
