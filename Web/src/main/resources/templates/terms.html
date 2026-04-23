@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Incluye el head común con título "Condiciones de uso" -->
+<head th:replace="~{fragmentos/layout :: cabeceraComun('Condiciones de uso')}">
+    <title>Condiciones de uso</title>
+</head>
+
+<body>
+
+<!-- Barra de navegación común -->
+<nav th:replace="~{fragmentos/layout :: navbar}"></nav>
+
+<main>
+
+    <!-- Cabecera de la página -->
+    <section class="seccion" style="background-color: var(--color-blanco); padding-bottom: 2rem;">
+        <div class="container">
+            <h1 class="seccion-titulo">Condiciones de uso</h1>
+        </div>
+    </section>
+
+
+    <!-- Contenido de las condiciones -->
+    <section class="seccion" style="padding-top: 2rem;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-10 offset-md-1">
+
+                    <!-- Sección 1 -->
+                    <h2 class="seccion-titulo text-start" style="font-size: 1.4rem;">
+                        1. Aceptación de las condiciones
+                    </h2>
+                    <p class="footer-texto">
+                        Al acceder y utilizar el sitio web de Kairos Luxe, el usuario acepta
+                        quedar vinculado por las presentes condiciones de uso. Si no está de
+                        acuerdo con alguna de ellas, le rogamos que no utilice nuestro sitio.
+                    </p>
+
+                    <hr class="separador-kairos"/>
+
+                    <!-- Sección 2 -->
+                    <h2 class="seccion-titulo text-start" style="font-size: 1.4rem;">
+                        2. Uso del sitio web
+                    </h2>
+                    <p class="footer-texto">
+                        El usuario se compromete a utilizar el sitio web de conformidad con
+                        la ley, la moral y el orden público. Queda prohibido el uso del sitio
+                        para fines ilícitos o que puedan dañar los derechos e intereses de
+                        terceros.
+                    </p>
+
+                    <hr class="separador-kairos"/>
+
+                    <!-- Sección 3 -->
+                    <h2 class="seccion-titulo text-start" style="font-size: 1.4rem;">
+                        3. Propiedad intelectual
+                    </h2>
+                    <p class="footer-texto">
+                        Todos los contenidos del sitio web de Kairos Luxe, incluyendo textos,
+                        imágenes, logotipos y diseños, son propiedad de Kairos Luxe o de sus
+                        proveedores de contenido y están protegidos por las leyes de propiedad
+                        intelectual vigentes.
+                    </p>
+
+                    <hr class="separador-kairos"/>
+
+                    <!-- Sección 4 -->
+                    <h2 class="seccion-titulo text-start" style="font-size: 1.4rem;">
+                        4. Política de privacidad
+                    </h2>
+                    <p class="footer-texto">
+                        Kairos Luxe se compromete a proteger la privacidad de sus usuarios.
+                        Los datos personales recogidos serán tratados conforme al Reglamento
+                        General de Protección de Datos (RGPD) y la legislación española vigente.
+                    </p>
+
+                    <hr class="separador-kairos"/>
+
+                    <!-- Sección 5 -->
+                    <h2 class="seccion-titulo text-start" style="font-size: 1.4rem;">
+                        5. Política de devoluciones
+                    </h2>
+                    <p class="footer-texto">
+                        El usuario dispone de 14 días naturales desde la recepción del pedido
+                        para ejercer su derecho de desistimiento, conforme a la normativa
+                        europea de comercio electrónico. Los productos deben devolverse en
+                        perfectas condiciones y en su embalaje original.
+                    </p>
+
+                    <hr class="separador-kairos"/>
+
+                    <!-- Sección 6 -->
+                    <h2 class="seccion-titulo text-start" style="font-size: 1.4rem;">
+                        6. Modificaciones
+                    </h2>
+                    <p class="footer-texto">
+                        Kairos Luxe se reserva el derecho de modificar las presentes condiciones
+                        en cualquier momento. Los cambios serán publicados en esta página y
+                        entrarán en vigor desde el momento de su publicación.
+                    </p>
+
+                    <hr class="separador-kairos"/>
+
+                    <!-- Sección 7 -->
+                    <h2 class="seccion-titulo text-start" style="font-size: 1.4rem;">
+                        7. Contacto
+                    </h2>
+                    <p class="footer-texto">
+                        Para cualquier consulta relacionada con estas condiciones, puede
+                        contactar con nosotros en:
+                        <a th:href="@{/sobre-nosotros.html}">info@kairosluxe.es</a>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- Pie de página común -->
+<footer th:replace="~{fragmentos/layout :: footer}"></footer>
+
+<!-- Scripts Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
