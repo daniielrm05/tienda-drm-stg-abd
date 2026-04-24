@@ -1,7 +1,7 @@
 package es.iesclaradelrey.da2d1a.tiendadrmstgabd.tiendadrmstgabdweb;
 
-import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entitie.CategoriaReloj;
-import es.iesclaradelrey.da2d1a.tiendadrmstgabd.service.CategoriaRelojService;
+import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entities.CategoriaReloj;
+import es.iesclaradelrey.da2d1a.tiendadrmstgabd.services.CategoriaRelojService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 

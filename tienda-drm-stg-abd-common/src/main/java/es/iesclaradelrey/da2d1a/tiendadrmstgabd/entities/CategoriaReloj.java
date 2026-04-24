@@ -1,4 +1,4 @@
-package es.iesclaradelrey.da2d1a.tiendadrmstgabd.entitie;
+package es.iesclaradelrey.da2d1a.tiendadrmstgabd.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

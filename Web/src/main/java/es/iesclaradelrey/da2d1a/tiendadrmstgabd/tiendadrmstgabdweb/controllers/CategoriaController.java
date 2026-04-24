@@ -1,7 +1,7 @@
 package es.iesclaradelrey.da2d1a.tiendadrmstgabd.tiendadrmstgabdweb.controllers;
 
-import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entitie.CategoriaReloj;
-import es.iesclaradelrey.da2d1a.tiendadrmstgabd.service.CategoriaRelojService;
+import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entities.CategoriaReloj;
+import es.iesclaradelrey.da2d1a.tiendadrmstgabd.services.CategoriaRelojService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

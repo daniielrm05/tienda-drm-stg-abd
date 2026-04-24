@@ -1,7 +1,7 @@
-package es.iesclaradelrey.da2d1a.tiendadrmstgabd.service;
+package es.iesclaradelrey.da2d1a.tiendadrmstgabd.services;
 
-import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entitie.CategoriaReloj;
-import es.iesclaradelrey.da2d1a.tiendadrmstgabd.repositorie.CategoriaRelojRepository;
+import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entities.CategoriaReloj;
+import es.iesclaradelrey.da2d1a.tiendadrmstgabd.repositories.CategoriaRelojRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
