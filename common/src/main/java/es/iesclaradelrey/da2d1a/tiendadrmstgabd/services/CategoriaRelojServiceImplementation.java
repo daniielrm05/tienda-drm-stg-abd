@@ -20,26 +20,32 @@ public class CategoriaRelojServiceImplementation implements CategoriaRelojServic
         this.repository = repository;
     }
 
-    // Se limita a pasar la llamada al repositorio
+    // Devuelve todas las categoria_reloj
     @Override
     public Collection<CategoriaReloj> buscarTodo() {
-        return repository.buscarTodo();
+        return repository.findAll();
     }
 
-    // Se limita a pasar la llamada al repositorio
+    // Busca una categoria_reloj por su id
     @Override
     public Optional<CategoriaReloj> buscarPorId(Long id) {
-        return repository.buscarPorId(id);
+        return repository.findById(id);
     }
 
+    // Guarda una categoria_reloj
     @Override
     public void guardar(CategoriaReloj categoria) {
-        repository.guardar(categoria);
+        // Se asegura de no guardar / modificar una categoria_reloj con el mismo nombre
+        if (repository.existsByNombre(categoria.getNombre())) {
+            throw new RuntimeException("Ya existe una categoría con ese nombre");
+        }
+        repository.save(categoria);
     }
 
+    //Elimina una categoria_reloj
     @Override
     public void eliminar(Long id) {
-        repository.eliminar(id);
+        repository.deleteById(id);
     }
 
 }
