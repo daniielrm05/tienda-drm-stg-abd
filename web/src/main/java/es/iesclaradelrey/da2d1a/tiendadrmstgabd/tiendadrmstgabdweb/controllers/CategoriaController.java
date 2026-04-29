@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 // Controlador que gestiona las peticiones relacionadas con las categorías de relojes
 @Controller
@@ -36,17 +39,20 @@ public class CategoriaController {
     // Responde a /categorias/{id} — muestra el detalle de una categoría concreta
     @GetMapping("/{id}")
     public String detalle(@PathVariable Long id, HttpServletRequest request, Model model) {
-        // Busca la categoría por su id
         Optional<CategoriaReloj> cat = service.buscarPorId(id);
 
         if (cat.isPresent()) {
-            // Si existe, la añade al modelo y muestra la vista de detalle
+            // Ordena los relojes de la categoría alfabéticamente usando Comparator
+            List<?> relojesOrdenados = cat.get().getRelojes().stream()
+                    .sorted(Comparator.comparing(r -> r.getNombre()))
+                    .collect(Collectors.toList());
+
             model.addAttribute("categoria", cat.get());
+            model.addAttribute("relojes", relojesOrdenados);
             model.addAttribute("requestURI", request.getRequestURI());
             return "categorias/detalle";
         }
 
-        // Si el id no existe, redirige al listado
         return "redirect:/categorias";
     }
 }
