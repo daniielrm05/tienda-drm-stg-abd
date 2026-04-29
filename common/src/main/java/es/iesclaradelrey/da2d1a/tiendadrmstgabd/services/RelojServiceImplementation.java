@@ -2,6 +2,7 @@ package es.iesclaradelrey.da2d1a.tiendadrmstgabd.services;
 
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entities.Reloj;
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.repositories.RelojRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -10,6 +11,7 @@ import java.util.Optional;
  * Implementación de la interfaz del servicio de reloj.
  */
 
+@Service
 public class RelojServiceImplementation implements RelojService {
 
     private final RelojRepository repository;
