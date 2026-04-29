@@ -76,6 +76,13 @@ Copia y pega para su uso: <nav th:replace="~{fragmentos/layout :: navbar}"></nav
                     Categorías
                 </a>
 
+                <!-- Relojes -->
+                <a class="nav-link"
+                   th:href="@{/relojes}"
+                   th:classappend="${requestURI != null and #strings.contains(requestURI, '/relojes')} ? ' activo' : ''">
+                    Relojes
+                </a>
+
                 <!-- Sobre nosotros-->
                 <!-- Al ser contenido estático no usa th:href sino href normal -->
                 <li class="nav-item">
