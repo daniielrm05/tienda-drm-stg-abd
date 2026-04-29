@@ -13,6 +13,7 @@ import java.util.Optional;
 public interface RelojService {
     Collection<Reloj> buscarTodo();
     Optional<Reloj> buscarPorId(Long id);
+    Optional<Reloj> buscarPorCodigo(String codigo);
     void guardar(Reloj reloj);
     void eliminar(Long id);
 }

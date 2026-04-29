@@ -12,6 +12,7 @@ import java.util.Optional;
 public interface CategoriaRelojService {
     Collection<CategoriaReloj> buscarTodo();
     Optional<CategoriaReloj> buscarPorId(Long id);
+    Optional<CategoriaReloj> buscarPorNombre(String nombre);
     void guardar(CategoriaReloj categoria);
     void eliminar(Long id);
 }

@@ -24,6 +24,10 @@ public class RelojServiceImplementation implements RelojService {
     @Override
     public Optional<Reloj> buscarPorId(Long id) { return repository.findById(id); }
 
+    //Devuelve un reloj por su codigo
+    @Override
+    public Optional<Reloj> buscarPorCodigo(String codigo) { return repository.findByCodigo(codigo); }
+
     // Guarda reloj
     @Override
     public void guardar(Reloj reloj) {

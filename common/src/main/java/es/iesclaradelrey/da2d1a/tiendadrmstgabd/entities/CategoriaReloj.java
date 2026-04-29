@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 /**
  * Define las categorías principales de la tienda de relojes.
  */
@@ -34,5 +36,10 @@ public class CategoriaReloj {
 
     @Size(max = 500)                                        //acepta hasta un máximo de 500 caracteres
     private String imagen;
+
+    @ManyToMany(mappedBy = "categorias")                    //relación muchos a muchos con Reloj
+                                                            //una categoría puede tener muchos relojes
+                                                            //mappedBy indica que la tabla intermedia se define en Reloj
+    private Set<Reloj> relojes;
 
 }

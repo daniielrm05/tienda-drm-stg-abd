@@ -32,6 +32,12 @@ public class CategoriaRelojServiceImplementation implements CategoriaRelojServic
         return repository.findById(id);
     }
 
+    // Devuelve una categoria_reloj por su nombre
+    @Override
+    public Optional<CategoriaReloj> buscarPorNombre(String nombre) {
+        return repository.findByNombre(nombre);
+    }
+
     // Guarda una categoria_reloj
     @Override
     public void guardar(CategoriaReloj categoria) {

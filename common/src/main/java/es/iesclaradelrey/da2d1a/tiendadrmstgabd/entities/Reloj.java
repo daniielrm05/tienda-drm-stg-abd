@@ -6,42 +6,56 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+import java.util.Set;
+
+@Entity                                                 //indica que es una entidad JPA
+@AllArgsConstructor                                     //constructor con todos los argumentos
+@NoArgsConstructor                                      //constructor vacío
+@Data                                                   //genera getters, setters y toString
 public class Reloj {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //id autogenerado
     private Long id;
 
-    @NotBlank
+    @NotBlank                                           //no permite null ni vacío
     @Pattern(regexp = "\\d{13}", message = "El EAN debe tener exactamente 13 dígitos")
-    @Column(length = 13, unique = true)
+    //exactamente 13 dígitos (EAN-13)
+    @Column(length = 13, unique = true)                 //longitud fija 13 y único en la BD
     private String codigo;
 
-    @NotBlank
-    @Size(max = 200)
+    @NotBlank                                           //obligatorio
+    @Size(max = 200)                                    //máximo 200 caracteres
     private String nombre;
 
-    @Size(max = 50)
-    private String marca;
-
-    @NotBlank
-    @Size(max = 4000)
+    @NotBlank                                           //obligatorio
+    @Size(max = 4000)                                   //máximo 4000 caracteres
     private String descripcion;
 
-    @Size(max = 500)
+    @Size(max = 500)                                    //máximo 500 caracteres
     private String imagen;
 
-    @NotNull
-    @Positive
+    @NotNull                                            //obligatorio
+    @Positive                                           //solo valores positivos
     private Double precio;
 
-    @NotNull
-    @Min(0)
-    @Max(99)
+    @NotNull                                            //obligatorio
+    @Min(0)                                             //mínimo 0
+    @Max(99)                                            //máximo 99
     private Integer descuento;
+
+    @ManyToOne(optional = false)                        //muchos relojes pertenecen a una marca
+                                                        //optional = false → obligatorio (siempre tiene marca)
+    @JoinColumn(name = "marca_id", nullable = false)    //clave foránea en la tabla reloj
+    private Marca marca;
+
+    @ManyToMany                                         //muchos relojes pueden tener muchas categorías
+                                                        //y una categoría puede tener muchos relojes
+    @JoinTable(
+            name = "reloj_categoria",                   //tabla intermedia
+            joinColumns = @JoinColumn(name = "reloj_id"),        //FK hacia reloj
+            inverseJoinColumns = @JoinColumn(name = "categoria_id") //FK hacia categoría
+    )
+    private Set<CategoriaReloj> categorias;
 
 }
