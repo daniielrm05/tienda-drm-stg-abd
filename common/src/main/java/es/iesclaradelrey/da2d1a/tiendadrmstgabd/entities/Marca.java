@@ -3,20 +3,21 @@ package es.iesclaradelrey.da2d1a.tiendadrmstgabd.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Set;
 
 @Entity                                                 //indica que es una entidad JPA
 @AllArgsConstructor                                     //constructor con todos los argumentos
 @NoArgsConstructor                                      //constructor vacío
-@Data                                                   //genera getters, setters y toString
+@Getter                                                 //genera getters
+@Setter                                                 //genera setters
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)       //equals y hashCode con los argumentos que indiquemos
 public class Marca {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //id autogenerado (auto-increment)
+    @EqualsAndHashCode.Include // Solo el ID define la igualdad
     private Long id;
 
     @NotBlank                                           //no permite null ni cadena vacía

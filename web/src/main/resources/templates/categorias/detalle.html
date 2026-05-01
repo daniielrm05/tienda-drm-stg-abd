@@ -7,16 +7,32 @@
 <nav th:replace="~{/fragmentos/layout :: navbar}"></nav>
 
 <main class="container my-5">
-    <div class="row">
-        <div class="col-md-6">
+    <div class="row mb-5">
+        <!-- Información de la Categoría -->
+        <div class="col-md-4">
             <img th:src="@{/imagenes/categorias/{img}(img=${categoria.imagen != null ? categoria.imagen : 'no-image.jpg'})}"
-                 class="img-fluid rounded shadow" alt="Reloj">
+                 class="img-fluid rounded shadow" alt="Imagen Categoría">
         </div>
-        <div class="col-md-6">
-            <h1 th:text="${categoria.nombre}">Nombre</h1>
+        <div class="col-md-8">
+            <h1 th:text="${'Categoría: ' + categoria.nombre}">Nombre</h1>
             <p class="lead" th:text="${categoria.descripcion}">Descripción</p>
-            <a th:href="@{/categorias}" class="btn btn-outline-primary">Volver al listado</a>
+            <a th:href="@{/productos}" class="btn btn-outline-secondary">Volver al catálogo completo</a>
         </div>
+    </div>
+
+    <hr>
+    <h2 class="mb-4">Productos en esta categoría</h2>
+
+    <!-- LISTADO DE RELOJES (Requisito PDF 7) -->
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div th:each="reloj : ${relojes}" class="col">
+            <div th:replace="~{fragmentos/piezas :: cardReloj(${reloj})}"></div>
+        </div>
+    </div>
+
+    <!-- Si la categoría está vacía -->
+    <div th:if="${#lists.isEmpty(relojes)}" class="alert alert-info mt-4">
+        No hay productos asignados a esta categoría actualmente.
     </div>
 </main>
 

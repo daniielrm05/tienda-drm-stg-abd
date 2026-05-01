@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos/layout :: cabeceraComun('Relojes ' + ${marca.nombre})}"></head>
+<body class="d-flex flex-column h-100">
+
+<nav th:replace="~{fragmentos/layout :: navbar}"></nav>
+
+<main class="container my-5 flex-shrink-0">
+    <div class="mb-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/relojes}">Catálogo</a></li>
+                <li class="breadcrumb-item active" th:text="${marca.nombre}">Marca</li>
+            </ol>
+        </nav>
+        <h1 class="display-5 fw-bold">Relojes marca <span th:text="${marca.nombre}">Marca</span></h1>
+        <p class="lead text-muted" th:text="'Viendo todos los productos de ' + ${marca.nombre}"></p>
+    </div>
+
+    <hr>
+
+    <!-- Reutilizamos la rejilla de productos de listado.html -->
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
+        <div th:each="reloj : ${relojes}" class="col">
+            <div th:replace="~{fragmentos/piezas :: cardReloj(${reloj})}"></div>
+        </div>
+    </div>
+
+    <!-- Mensaje si no hay productos -->
+    <div th:if="${#lists.isEmpty(relojes)}" class="alert alert-info">
+        No hay relojes disponibles para esta marca actualmente.
+    </div>
+</main>
+
+<footer th:replace="~{fragmentos/layout :: footer}"></footer>
+</body>
+</html>

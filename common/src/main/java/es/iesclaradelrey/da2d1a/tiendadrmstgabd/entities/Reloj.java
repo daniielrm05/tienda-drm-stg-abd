@@ -2,20 +2,21 @@ package es.iesclaradelrey.da2d1a.tiendadrmstgabd.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity                                                 //indica que es una entidad JPA
 @AllArgsConstructor                                     //constructor con todos los argumentos
 @NoArgsConstructor                                      //constructor vacío
-@Data                                                   //genera getters, setters y toString
+@Getter                                                 //genera getters
+@Setter                                                 //genera setters
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)       //equals y hashCode con los argumentos que indiquemos
 public class Reloj {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //id autogenerado
+    @EqualsAndHashCode.Include // Solo el ID define la igualdad
     private Long id;
 
     @NotBlank                                           //no permite null ni vacío
@@ -49,13 +50,12 @@ public class Reloj {
     @JoinColumn(name = "marca_id", nullable = false)    //clave foránea en la tabla reloj
     private Marca marca;
 
-    @ManyToMany                                         //muchos relojes pueden tener muchas categorías
-                                                        //y una categoría puede tener muchos relojes
+    @ManyToMany(fetch = FetchType.EAGER)                //muchos relojes pueden tener muchas categorías y una categoría puede tener muchos relojes
     @JoinTable(
             name = "reloj_categoria",                   //tabla intermedia
             joinColumns = @JoinColumn(name = "reloj_id"),        //FK hacia reloj
             inverseJoinColumns = @JoinColumn(name = "categoria_id") //FK hacia categoría
     )
-    private Set<CategoriaReloj> categorias;
+    private List<CategoriaReloj> categorias;
 
 }

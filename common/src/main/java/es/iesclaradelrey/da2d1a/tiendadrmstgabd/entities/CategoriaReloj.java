@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Set;
 
@@ -20,7 +18,9 @@ import java.util.Set;
 })
 @AllArgsConstructor                                        //constructor con todos los argumentos
 @NoArgsConstructor                                         //constructor con argumentos vacíos
-@Data                                                      //genera getters, setters y toString
+@Getter                                                 //genera getters
+@Setter                                                 //genera setters
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)       //equals y hashCode con los argumentos que indiquemos
 public class CategoriaReloj {
 
     @Id

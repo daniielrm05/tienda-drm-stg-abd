@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Marcas - Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+</head>
+<body class="bg-light">
+
+<div th:replace="~{fragmentos/admin/nav :: navbarAdmin}"></div>
+
+<main class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h2 fw-bold">Listado de Marcas</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/admin}">Admin</a></li>
+                    <li class="breadcrumb-item active">Marcas</li>
+                </ol>
+            </nav>
+        </div>
+        <!-- Enlace para crear nuevo elemento -->
+        <a th:href="@{/admin/marcas/new}" class="btn btn-primary">
+            <i class="bi bi-plus-lg me-1"></i> Nueva Marca
+        </a>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-dark">
+                    <tr>
+                        <th class="ps-4">ID</th>
+                        <th>Nombre de la Marca</th>
+                        <th class="text-end pe-4">Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Se pasará la lista 'marcas' al modelo -->
+                    <tr th:each="marca : ${marcas}">
+                        <td class="ps-4 fw-bold" th:text="${marca.id}">1</td>
+                        <td th:text="${marca.nombre}">Rolex</td>
+                        <td class="text-end pe-4">
+                            <!-- Enlace Editar (Requisito 3.2: URL /admin/marcas/{id}/edit) -->
+                            <a th:href="@{/admin/marcas/{id}/edit(id=${marca.id})}"
+                               class="btn btn-sm btn-outline-warning me-2"
+                               title="Editar marca" aria-label="Editar marca">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                            <!-- Enlace Borrar (URL /admin/marcas/{id}/delete) -->
+                            <a th:href="@{/admin/marcas/{id}/delete(id=${marca.id})}"
+                               class="btn btn-sm btn-outline-danger"
+                               title="Borrar marca" aria-label="Borrar marca">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

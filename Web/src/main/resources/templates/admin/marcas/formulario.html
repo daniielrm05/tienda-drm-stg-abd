@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${marca.id == null} ? 'Nueva Marca' : 'Editar Marca'">Formulario Marca</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+</head>
+<body class="bg-light">
+
+<div th:replace="~{fragmentos/admin/nav :: navbarAdmin}"></div>
+
+<main class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow border-0">
+                <div class="card-header bg-dark text-white p-3">
+                    <h2 class="h5 mb-0" th:text="${marca.id == null} ? 'Crear Nueva Marca' : 'Modificar Marca'">
+                        Gestión de Marca
+                    </h2>
+                </div>
+                <div class="card-body p-4">
+
+                    <!-- Bloque para mostrar errores -->
+                    <div th:if="${error}" class="alert alert-danger d-flex align-items-center" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        <div th:text="${error}">Mensaje de error aquí</div>
+                    </div>
+
+                    <form th:action="@{/admin/marcas/save}" th:object="${marca}" method="post">
+                        <!-- Campo oculto para el ID en caso de edición -->
+                        <input type="hidden" th:field="*{id}" />
+
+                        <div class="mb-4">
+                            <label for="nombre" class="form-label fw-bold">Nombre de la Marca</label>
+                            <input type="text" th:field="*{nombre}" class="form-control" id="nombre"
+                                   placeholder="Ej: Rolex, Omega, Casio..." required>
+                            <div class="form-text">El nombre debe ser único en la base de datos.</div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <!-- Botón Aceptar -->
+                            <button type="submit" class="btn btn-primary px-4">
+                                <i class="bi bi-check-lg me-1"></i> Aceptar
+                            </button>
+
+                            <!-- Botón Cancelar -->
+                            <a th:href="@{/admin/marcas}" class="btn btn-outline-secondary px-4">
+                                Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

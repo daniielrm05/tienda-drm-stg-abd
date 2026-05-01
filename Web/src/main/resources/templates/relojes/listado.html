@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragmentos/layout :: cabeceraComun('Nuestro Catálogo')}">
+</head>
+
+<body class="d-flex flex-column h-100">
+
+<nav th:replace="~{/fragmentos/layout :: navbar}"></nav>
+
+<main class="container my-5 flex-shrink-0">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">Catálogo de Relojes</h1>
+        <p class="text-muted">Piezas de precisión para cada momento</p>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <!-- Bucle que recorre la lista de 20 relojes -->
+        <div th:each="reloj : ${relojes}" class="col">
+            <div th:replace="~{fragmentos/piezas :: cardReloj(${reloj})}"></div>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="~{/fragmentos/layout :: footer}"></footer>
+
+<div th:replace="~{fragmentos/layout :: scriptsComunes}"></div>
+</body>
+</html>
