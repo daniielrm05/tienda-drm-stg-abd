@@ -27,7 +27,7 @@
                         <div th:text="${error}">Mensaje de error aquí</div>
                     </div>
 
-                    <form th:action="@{/admin/marcas/save}" th:object="${marca}" method="post">
+                    <form th:action="@{/admin/marcas}" th:object="${marca}" method="post">
                         <!-- Campo oculto para el ID en caso de edición -->
                         <input type="hidden" th:field="*{id}" />
 

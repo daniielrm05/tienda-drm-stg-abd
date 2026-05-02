@@ -25,7 +25,7 @@
                         <span th:text="${error}">Error en los datos</span>
                     </div>
 
-                    <form th:action="@{/templates/admin/relojes/save}" th:object="${reloj}" method="post">
+                    <form th:action="@{/admin/relojes}" th:object="${reloj}" method="post">
                         <input type="hidden" th:field="*{id}" />
 
                         <div class="row g-3">
@@ -38,7 +38,7 @@
                             <!-- Código EAN (13 dígitos) -->
                             <div class="col-md-4 mb-3">
                                 <label class="form-label fw-bold">Código EAN</label>
-                                <input type="text" th:field="*{codigoEan}" class="form-control" maxlength="13" required>
+                                <input type="text" th:field="*{codigo}" class="form-control" maxlength="13" required>
                             </div>
 
                             <!-- Marca (Relación ManyToOne - Requisito 3.3) -->
@@ -92,7 +92,7 @@
 
                         <div class="d-flex gap-2 mt-4">
                             <button type="submit" class="btn btn-dark btn-lg px-5">Aceptar</button>
-                            <a th:href="@{/templates/admin/relojes}" class="btn btn-outline-secondary btn-lg px-5">Cancelar</a>
+                            <a th:href="@{/admin/relojes}" class="btn btn-outline-secondary btn-lg px-5">Cancelar</a>
                         </div>
                     </form>
                 </div>
