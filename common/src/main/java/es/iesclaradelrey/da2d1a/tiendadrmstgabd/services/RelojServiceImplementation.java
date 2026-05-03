@@ -1,5 +1,6 @@
 package es.iesclaradelrey.da2d1a.tiendadrmstgabd.services;
 
+import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entities.Marca;
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entities.Reloj;
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.repositories.RelojRepository;
 import org.springframework.stereotype.Service;
@@ -33,10 +34,19 @@ public class RelojServiceImplementation implements RelojService {
     // Guarda reloj
     @Override
     public void guardar(Reloj reloj) {
-        // Si existe un reloj con el mismo codigo lanza una excepción
-        if (repository.existsByCodigo(reloj.getCodigo())) {
-            throw new RuntimeException("Reloj ya existe");
+        // Se comprueba si existe algún reloj con ese código en la BD
+        Optional<Reloj> relojExistente = repository.findByCodigo(reloj.getCodigo());
+
+        // Si el codigo ya existe, se valida si es un duplicado real o se esta editando
+        if (relojExistente.isPresent()) {
+            // Se valida el conflicto de código único
+            // Se comprueba el ID del reloj que llega con el ID del que ya está en la BD
+            if (reloj.getId() == null || !reloj.getId().equals(relojExistente.get().getId())) {
+                throw new RuntimeException("Ya existe un reloj con el código: " + reloj.getCodigo());
+            }
         }
+
+        // Si pasa las validaciones, se guarda
         repository.save(reloj);
     }
 

@@ -41,12 +41,28 @@ public class MarcaServiceImplementation implements MarcaService {
     // Guarda una marca
     @Override
     public void guardar(Marca marca) {
+        // Se comprueba si existe alguna marca con ese nombre en la BD
+        Optional<Marca> marcaExistente = repository.findByNombre(marca.getNombre());
 
-        // Si ya existe una marca con el mismo nombre lanza una excepción
-        if (repository.existsByNombre(marca.getNombre())) {
-            throw new RuntimeException("Ya existe una marca con ese nombre");
+        // Si el nombre ya existe, se valida si es un duplicado real o se esta editando
+        if (marcaExistente.isPresent()) {
+
+            // Caso A: Es una marca nueva (id es null) pero el nombre ya existe -> ERROR
+            if (marca.getId() == null) {
+                throw new RuntimeException("Ya existe una marca con ese nombre");
+            }
+
+            // Caso B: Estoy editando (id no es null), el nombre existe,
+            // pero el ID de la BD es distinto al mío -> ERROR (otro ya usa ese nombre)
+            if (!marca.getId().equals(marcaExistente.get().getId())) {
+                throw new RuntimeException("Ya existe otra marca con ese nombre");
+            }
+
+            // Si el ID de marcaExistente es IGUAL al de marca.getId(),
+            // se ignora el if y se deja que guarde (es un Update legal).
         }
 
+        // Si pasa las validaciones, se guarda
         repository.save(marca);
     }
 

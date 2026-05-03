@@ -41,10 +41,18 @@ public class CategoriaRelojServiceImplementation implements CategoriaRelojServic
     // Guarda una categoria_reloj
     @Override
     public void guardar(CategoriaReloj categoria) {
-        // Se asegura de no guardar / modificar una categoria_reloj con el mismo nombre
-        if (repository.existsByNombre(categoria.getNombre())) {
-            throw new RuntimeException("Ya existe una categoría con ese nombre");
+        // Buscamos si ya existe una categoría con ese nombre
+        Optional<CategoriaReloj> categoriaExistente = repository.findByNombre(categoria.getNombre());
+
+        if (categoriaExistente.isPresent()) {
+            // Si existe, validamos si es un duplicado real o es la misma que estamos editando
+            // Si el ID es null (nueva) o el ID es diferente al encontrado (otro registro tiene ese nombre)
+            if (categoria.getId() == null || !categoria.getId().equals(categoriaExistente.get().getId())) {
+                throw new RuntimeException("Ya existe una categoría con ese nombre");
+            }
         }
+
+        // Si no hay conflicto, guardamos (Spring hará INSERT o UPDATE según corresponda)
         repository.save(categoria);
     }
 
