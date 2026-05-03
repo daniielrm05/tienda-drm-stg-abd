@@ -19,7 +19,11 @@
         </div>
         <div class="card-body p-4">
 
-          <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div>
+          <!-- Bloque para mostrar errores -->
+          <div th:if="${error}" class="alert alert-danger d-flex align-items-center" role="alert">
+            <i class="bi bi-exclamation-octagon-fill me-2"></i>
+            <div th:text="${error}">Mensaje de error aquí</div>
+          </div>
 
           <form th:action="@{/admin/categorias}" th:object="${categoria}" method="post">
             <input type="hidden" th:field="*{id}" />
