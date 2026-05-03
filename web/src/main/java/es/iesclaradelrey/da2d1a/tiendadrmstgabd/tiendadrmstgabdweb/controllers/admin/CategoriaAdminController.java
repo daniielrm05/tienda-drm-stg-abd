@@ -35,11 +35,17 @@ public class CategoriaAdminController {
         return "admin/categorias/formulario";
     }
 
-    //Guardar / Actualizar
+    //Guardar / Actualizar — si falla, volvemos al formulario con el error y los datos que había
     @PostMapping("/admin/categorias")
-    public String guardar(@ModelAttribute CategoriaReloj categoria) {
-        categoriaService.guardar(categoria);
-        return "redirect:/admin/categorias";
+    public String guardar(@ModelAttribute CategoriaReloj categoria, Model model) {
+        try {
+            categoriaService.guardar(categoria);
+            return "redirect:/admin/categorias";
+        } catch (Exception e) {
+            model.addAttribute("categoria", categoria);
+            model.addAttribute("error", e.getMessage());
+            return "admin/categorias/formulario";
+        }
     }
 
     //Formulario para actualizar
@@ -56,10 +62,16 @@ public class CategoriaAdminController {
         return "admin/categorias/eliminar";
     }
 
-    //Borrar
+    //Borrar — si falla, volvemos a la pantalla de confirmación con el error
     @PostMapping("/admin/categorias/{id}/delete")
-    public String borrar(@PathVariable Long id) {
-        categoriaService.eliminar(id);
-        return "redirect:/admin/categorias";
+    public String borrar(@PathVariable Long id, Model model) {
+        try {
+            categoriaService.eliminar(id);
+            return "redirect:/admin/categorias";
+        } catch (Exception e) {
+            model.addAttribute("categoria", categoriaService.buscarPorId(id).orElseThrow());
+            model.addAttribute("error", e.getMessage());
+            return "admin/categorias/eliminar";
+        }
     }
 }

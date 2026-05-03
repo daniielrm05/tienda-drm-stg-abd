@@ -35,11 +35,17 @@ public class MarcaAdminController {
         return "admin/marcas/formulario";
     }
 
-    //Guardar / Actualizar
+    //Guardar / Actualizar — si falla, volvemos al formulario con el error y los datos que había
     @PostMapping("/admin/marcas")
-    public String guardar(@ModelAttribute Marca marca) {
-        marcaService.guardar(marca);
-        return "redirect:/admin/marcas";
+    public String guardar(@ModelAttribute Marca marca, Model model) {
+        try {
+            marcaService.guardar(marca);
+            return "redirect:/admin/marcas";
+        } catch (Exception e) {
+            model.addAttribute("marca", marca);
+            model.addAttribute("error", e.getMessage());
+            return "admin/marcas/formulario";
+        }
     }
 
     //Formulario editar
@@ -56,10 +62,16 @@ public class MarcaAdminController {
         return "admin/marcas/eliminar";
     }
 
-    //Borrar
+    //Borrar — si falla, volvemos a la pantalla de confirmación con el error
     @PostMapping("/admin/marcas/{id}/delete")
-    public String borrar(@PathVariable Long id) {
-        marcaService.eliminar(id);
-        return "redirect:/admin/marcas";
+    public String borrar(@PathVariable Long id, Model model) {
+        try {
+            marcaService.eliminar(id);
+            return "redirect:/admin/marcas";
+        } catch (Exception e) {
+            model.addAttribute("marca", marcaService.buscarPorId(id).orElseThrow());
+            model.addAttribute("error", e.getMessage());
+            return "admin/marcas/eliminar";
+        }
     }
 }

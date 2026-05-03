@@ -6,10 +6,7 @@ import es.iesclaradelrey.da2d1a.tiendadrmstgabd.services.MarcaService;
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.services.RelojService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class RelojAdminController {
@@ -46,11 +43,20 @@ public class RelojAdminController {
         return "admin/relojes/formulario";
     }
 
-    //Guardar / Actualizar
+    //Guardar / Actualizar — si falla, volvemos al formulario con el error y los datos que había
+    //También recargamos marcas y categorías para que el formulario se muestre correctamente
     @PostMapping("/admin/relojes")
-    public String relojGuardar(@ModelAttribute Reloj reloj) {
-        relojService.guardar(reloj);
-        return "redirect:/admin/relojes";
+    public String relojGuardar(@ModelAttribute Reloj reloj, Model model) {
+        try {
+            relojService.guardar(reloj);
+            return "redirect:/admin/relojes";
+        } catch (Exception e) {
+            model.addAttribute("reloj", reloj);
+            model.addAttribute("todasMarcas", marcaService.buscarTodo());
+            model.addAttribute("todasCategorias", categoriaRelojService.buscarTodo());
+            model.addAttribute("error", e.getMessage());
+            return "admin/relojes/formulario";
+        }
     }
 
     //Formulario editar
@@ -69,11 +75,16 @@ public class RelojAdminController {
         return "admin/relojes/eliminar";
     }
 
-    //Borrar
+    //Borrar — si falla, volvemos a la pantalla de confirmación con el error
     @PostMapping("/admin/relojes/{id}/delete")
-    public String borrarReloj(@PathVariable Long id) {
-        relojService.eliminar(id);
-        return "redirect:/admin/relojes";
+    public String borrarReloj(@PathVariable Long id, Model model) {
+        try {
+            relojService.eliminar(id);
+            return "redirect:/admin/relojes";
+        } catch (Exception e) {
+            model.addAttribute("reloj", relojService.buscarPorId(id).orElseThrow());
+            model.addAttribute("error", e.getMessage());
+            return "admin/relojes/eliminar";
+        }
     }
-
 }
