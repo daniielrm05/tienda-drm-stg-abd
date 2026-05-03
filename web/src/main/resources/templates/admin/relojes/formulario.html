@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${reloj.id == null} ? 'Nuevo Reloj' : 'Editar Reloj'">Formulario Reloj</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+</head>
+<body class="bg-light">
+
+<div th:replace="~{fragmentos/admin/nav :: navbarAdmin}"></div>
+
+<main class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow border-0">
+                <div class="card-header bg-dark text-white p-3">
+                    <h2 class="h5 mb-0" th:text="${reloj.id == null} ? 'Añadir Nuevo Reloj' : 'Modificar Reloj'">Gestión de Reloj</h2>
+                </div>
+                <div class="card-body p-4">
+
+                    <!-- Errores -->
+                    <div th:if="${error}" class="alert alert-danger mb-4" role="alert">
+                        <i class="bi bi-exclamation-octagon-fill me-2"></i>
+                        <span th:text="${error}">Error en los datos</span>
+                    </div>
+
+                    <form th:action="@{/admin/relojes}" th:object="${reloj}" method="post">
+                        <input type="hidden" th:field="*{id}" />
+
+                        <div class="row g-3">
+                            <!-- Nombre -->
+                            <div class="col-md-8 mb-3">
+                                <label class="form-label fw-bold">Nombre del Reloj</label>
+                                <input type="text" th:field="*{nombre}" class="form-control" required>
+                            </div>
+
+                            <!-- Código EAN (13 dígitos) -->
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Código EAN</label>
+                                <input type="text" th:field="*{codigo}" class="form-control" maxlength="13" required>
+                            </div>
+
+                            <!-- Marca (Relación ManyToOne - Requisito 3.3) -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Marca</label>
+                                <select th:field="*{marca}" class="form-select" required>
+                                    <option value="">-- Seleccione Marca --</option>
+                                    <!-- El Alumno A pasará la lista 'todasMarcas' -->
+                                    <option th:each="m : ${todasMarcas}" th:value="${m.id}" th:text="${m.nombre}"></option>
+                                </select>
+                            </div>
+
+                            <!-- Precio -->
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-bold">Precio (€)</label>
+                                <input type="number" step="0.01" th:field="*{precio}" class="form-control" required>
+                            </div>
+
+                            <!-- Descuento -->
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label fw-bold">Descuento (%)</label>
+                                <input type="number" th:field="*{descuento}" class="form-control" min="0" max="99">
+                            </div>
+
+                            <!-- Descripción (Obligatoria max 4000 caracteres - PDF 05) -->
+                            <div class="col-12 mb-3">
+                                <label class="form-label fw-bold">Descripción</label>
+                                <textarea th:field="*{descripcion}" class="form-control" rows="4" required></textarea>
+                            </div>
+
+                            <!-- Categorías (Relación ManyToMany - Requisito 3.3) -->
+                            <div class="col-12 mb-4">
+                                <label class="form-label fw-bold d-block mb-2">Categorías asociadas</label>
+                                <div class="border rounded p-3 bg-white shadow-sm">
+                                    <div class="row">
+                                        <!-- El Alumno A pasará la lista 'todasCategorias' -->
+                                        <div th:each="cat : ${todasCategorias}" class="col-md-4 mb-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox"
+                                                       th:value="${cat.id}" th:field="*{categorias}"
+                                                       th:id="${'cat-' + cat.id}">
+                                                <label class="form-check-label" th:for="${'cat-' + cat.id}" th:text="${cat.nombre}">
+                                                    Categoría
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2 mt-4">
+                            <button type="submit" class="btn btn-dark btn-lg px-5">Aceptar</button>
+                            <a th:href="@{/admin/relojes}" class="btn btn-outline-secondary btn-lg px-5">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

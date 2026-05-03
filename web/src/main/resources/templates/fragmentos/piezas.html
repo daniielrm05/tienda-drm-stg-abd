@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<!--
+ FRAGMENTO: carta reloj
+ Copia y pega para su uso: <div th:replace="~{fragmentos/piezas :: cardReloj(${reloj})}"></div>
+ -->
+<!-- Definimos el fragmento 'cardReloj' que recibe un parámetro llamado 'reloj' -->
+<div th:fragment="cardReloj(reloj)" class="card h-100 shadow-sm border-0">
+
+    <div class="text-center p-3 position-relative">
+        <!-- Badge de descuento (Requisito PDF 05) -->
+        <span th:if="${reloj.descuento > 0}"
+              class="badge bg-danger position-absolute top-0 end-0 m-3"
+              th:text="${reloj.descuento} + '% dto.'">
+        </span>
+
+        <img th:src="${reloj.imagen != null ? reloj.imagen : '/imagenes/relojes/no-image.jpg'}"
+             class="card-img-top rounded"
+             th:alt="'Imagen de ' + ${reloj.nombre}"
+             style="height: 250px; object-fit: contain;">
+    </div>
+
+    <div class="card-body">
+        <div class="mb-2">
+            <!-- Enlace a Marca (Requisito PDF 07) -->
+            <a class="text-uppercase text-muted fw-bold small"
+               th:href="@{/marcas/{id}(id=${reloj.marca.id})}"
+               th:text="${reloj.marca.nombre}">Marca</a>
+            <h3 class="card-title h5 fw-bold" th:text="${reloj.nombre}">Nombre</h3>
+        </div>
+
+        <!-- Lógica de Categorías (Requisito PDF 07, Sección 3.5) -->
+        <div th:if="${not #lists.isEmpty(reloj.categorias)}" class="mb-2 small">
+            <p th:if="${reloj.categorias.size() == 1}" th:each="cat : ${reloj.categorias}">
+                <a th:href="@{/categorias/{id}(id=${cat.id})}" th:text="${cat.nombre}">Cat</a>
+            </p>
+            <ul th:if="${reloj.categorias.size() > 1}" class="ps-3">
+                <li th:each="cat : ${reloj.categorias}">
+                    <a th:href="@{/categorias/{id}(id=${cat.id})}" th:text="${cat.nombre}">Cat</a>
+                </li>
+            </ul>
+        </div>
+
+        <p class="card-text text-secondary small" th:text="${#strings.abbreviate(reloj.descripcion, 200)}"></p>
+
+        <div class="mt-3">
+            <div th:if="${reloj.descuento > 0}">
+                <span class="h4 fw-bold text-dark"
+                      th:text="${#numbers.formatDecimal(reloj.precio * (1 - reloj.descuento/100.0), 1, 2)} + '€'"></span>
+                <span class="text-decoration-line-through text-muted small ms-2" th:text="${reloj.precio} + '€'"></span>
+            </div>
+            <div th:unless="${reloj.descuento > 0}">
+                <span class="h4 fw-bold text-dark" th:text="${reloj.precio} + '€'"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-footer bg-transparent border-0 pb-4">
+        <a th:href="@{/relojes/{id}/{nombre}(id=${reloj.id}, nombre=${#strings.replace(reloj.nombre, ' ', '-')})}"
+           class="btn btn-dark w-100">Ver detalles</a>
+    </div>
+</div>
