@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 
 <!--
@@ -28,6 +28,19 @@ Copia y pega para su uso: <nav th:replace="~{fragmentos/admin/nav :: navbarAdmin
                 <li class="nav-item ms-lg-3">
                     <a class="btn btn-outline-light btn-sm" th:href="@{/relojes}">Volver a la Tienda</a>
                 </li>
+                <div class="d-flex align-items-center gap-3">
+                    <!-- Nombre del Administrador dinámico -->
+                    <span class="navbar-text text-dark">
+                        Hola, <strong th:text="${#authentication.name}">Admin</strong>
+                    </span>
+
+                    <!-- Botón de Salir (Logout) por POST -->
+                    <form th:action="@{/logout}" method="post" class="m-0">
+                        <button type="submit" class="btn btn-link nav-link p-0 text-danger" style="border:none; background:none;">
+                            <i class="bi bi-box-arrow-right"></i> Salir
+                        </button>
+                    </form>
+                </div>
             </ul>
         </div>
     </div>

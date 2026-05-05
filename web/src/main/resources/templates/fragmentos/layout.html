@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="cabeceraComun(tituloPagina)">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -97,7 +97,28 @@ Copia y pega para su uso: <nav th:replace="~{fragmentos/layout :: navbar}"></nav
                         Condiciones de uso
                     </a>
                 </li>
+                <!-- Sección de Autenticación -->
+                <li class="nav-item ms-lg-3 py-2 py-lg-0">
 
+                    <!-- 1. Si el usuario NO está autenticado -->
+                    <!-- Comprobamos si el objeto es nulo o si el nombre es el de usuario anónimo -->
+                    <div th:if="${#authentication == null or #authentication.name == 'anonymousUser'}" class="d-flex gap-2">
+                        <a class="btn btn-outline-primary btn-sm" th:href="@{/login}">Iniciar Sesión</a>
+                        <a class="btn btn-primary btn-sm" th:href="@{/register}">Registrarse</a>
+                    </div>
+
+                    <!-- 2. Si el usuario SÍ está autenticado -->
+                    <div th:if="${#authentication != null and #authentication.name != 'anonymousUser'}" class="d-flex align-items-center gap-3">
+                        <span class="navbar-text text-dark">
+                            Hola, <strong th:text="${#authentication.name}">Usuario</strong>
+                        </span>
+                        <form th:action="@{/logout}" method="post" class="m-0">
+                            <button type="submit" class="btn btn-link nav-link p-0 text-danger" style="border:none; background:none;">
+                                <i class="bi bi-box-arrow-right"></i> Salir
+                            </button>
+                        </form>
+                    </div>
+                </li>
             </ul>
 
 

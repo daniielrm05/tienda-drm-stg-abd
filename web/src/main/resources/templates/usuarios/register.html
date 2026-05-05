@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<!-- Usamos el fragmento de cabecera que ya tienes -->
+<head th:replace="~{fragmentos/layout :: cabeceraComun('Registro')}"></head>
+
+<body class="d-flex flex-column min-vh-100">
+<!-- Navbar -->
+<nav th:replace="~{fragmentos/layout :: navbar}"></nav>
+
+<main class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <!-- Tarjeta de Registro con estilo elegante -->
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4 p-md-5">
+                    <h2 class="text-center mb-4 font-playfair">Crea tu cuenta</h2>
+                    <p class="text-muted text-center mb-4">Únete a Kairos Luxe y descubre el arte del tiempo.</p>
+
+                    <!-- Formulario con th:action para CSRF automático -->
+                    <form th:action="@{/register}" th:object="${usuarioRegistroDto}" method="post" class="needs-validation">
+
+                        <!-- Alerta de errores generales -->
+                        <div th:if="${#fields.hasErrors('global')}" class="alert alert-danger">
+                            <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="mb-0"></p>
+                        </div>
+
+                        <div class="row">
+                            <!-- Nombre de Usuario -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Nombre de usuario</label>
+                                <input type="text" th:field="*{username}" class="form-control"
+                                       th:classappend="${#fields.hasErrors('username')} ? 'is-invalid' : ''" required>
+                                <div class="invalid-feedback" th:errors="*{username}">Error</div>
+                            </div>
+
+                            <!-- Contraseña -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Contraseña</label>
+                                <input type="password" th:field="*{password}" class="form-control"
+                                       th:classappend="${#fields.hasErrors('password')} ? 'is-invalid' : ''" required>
+                                <div class="invalid-feedback" th:errors="*{password}">Error</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Nombre Real -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Nombre</label>
+                                <input type="text" th:field="*{nombre}" class="form-control"
+                                       th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ''" required>
+                                <div class="invalid-feedback" th:errors="*{nombre}">Error</div>
+                            </div>
+
+                            <!-- Apellidos[cite: 3] -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Apellidos</label>
+                                <input type="text" th:field="*{apellidos}" class="form-control"
+                                       th:classappend="${#fields.hasErrors('apellidos')} ? 'is-invalid' : ''" required>
+                                <div class="invalid-feedback" th:errors="*{apellidos}">Error</div>
+                            </div>
+                        </div>
+
+                        <!-- Email[cite: 3] -->
+                        <div class="mb-3">
+                            <label class="form-label">Correo electrónico</label>
+                            <input type="email" th:field="*{email}" class="form-control"
+                                   th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : ''" placeholder="ejemplo@correo.com" required>
+                            <div class="invalid-feedback" th:errors="*{email}">Error</div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Teléfono (Opcional)[cite: 3] -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Teléfono <small class="text-muted">(Opcional)</small></label>
+                                <input type="tel" th:field="*{telefono}" class="form-control">
+                            </div>
+
+                            <!-- Fecha Nacimiento (Opcional)[cite: 3] -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Fecha de nacimiento</label>
+                                <input type="date" th:field="*{fechaNacimiento}" class="form-control">
+                            </div>
+                        </div>
+
+                        <!-- Checkbox Acepto Condiciones (REQUISITO OBLIGATORIO)[cite: 3] -->
+                        <div class="mb-4 form-check">
+                            <input type="checkbox" th:field="*{aceptaCondiciones}" class="form-check-input"
+                                   th:classappend="${#fields.hasErrors('aceptaCondiciones')} ? 'is-invalid' : ''" id="condiciones">
+                            <label class="form-check-label" for="condiciones">
+                                Acepto las <a th:href="@{/condiciones}" target="_blank">condiciones de uso</a> de la tienda.
+                            </label>
+                            <div class="invalid-feedback" th:errors="*{aceptaCondiciones}">Debe aceptar las condiciones</div>
+                        </div>
+
+                        <!-- Botón de Registro -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">Registrarse</button>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <span class="text-muted small">¿Ya tienes cuenta? </span>
+                            <a th:href="@{/login}" class="small text-decoration-none fw-bold">Inicia sesión aquí</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer th:replace="~{fragmentos/layout :: footer}"></footer>
+<div th:replace="~{fragmentos/layout :: scriptsComunes}"></div>
+</body>
+</html>

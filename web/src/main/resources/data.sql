@@ -64,3 +64,14 @@ INSERT INTO reloj_categoria (reloj_id, categoria_id) VALUES (5, 1); -- Mudmaster
 INSERT INTO reloj_categoria (reloj_id, categoria_id) VALUES (8, 2); -- Seiko 5 -> Casual
 INSERT INTO reloj_categoria (reloj_id, categoria_id) VALUES (9, 4); -- Seamaster -> Elegante
 INSERT INTO reloj_categoria (reloj_id, categoria_id) VALUES (10, 1); -- Carrera -> Deportivo
+
+
+INSERT INTO usuario (username, nombre, apellidos, email, password, fecha_registro)
+VALUES (
+        'admin',
+        'Admin',
+        'Sistema',
+        'admin@tienda.com',
+        '$2a$12$D476zB.F6NInWnpL98X9beH6G1eH/1Z516Yv32zT83D.O2Ym0NfMa',
+        CURRENT_TIMESTAMP
+       );

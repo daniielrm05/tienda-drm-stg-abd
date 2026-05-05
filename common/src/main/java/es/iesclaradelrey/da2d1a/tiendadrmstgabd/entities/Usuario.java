@@ -1,14 +1,12 @@
 package es.iesclaradelrey.da2d1a.tiendadrmstgabd.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,19 +17,31 @@ import java.time.LocalDateTime;
 public class Usuario {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String username;
 
+    @Column(nullable = false)
     private String nombre;
+
+    @Column(nullable = false)
     private String apellidos;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
+    // Campos opcionales según PDF
+    @Column(nullable = true)
+    private String telefono;
+
+    @Column(nullable = true)
+    private LocalDate fechaNacimiento; // LocalDate es mejor para fechas sin hora
+
+    @Column(nullable = false)
     private LocalDateTime fechaRegistro;
 }
