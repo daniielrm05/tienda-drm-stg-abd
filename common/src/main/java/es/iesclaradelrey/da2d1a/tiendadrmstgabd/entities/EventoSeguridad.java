@@ -9,6 +9,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
+@NoArgsConstructor
 @Getter
 @Setter
 public class EventoSeguridad {

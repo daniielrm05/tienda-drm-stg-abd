@@ -3,7 +3,9 @@ package es.iesclaradelrey.da2d1a.tiendadrmstgabd.security.service;
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entities.EventoSeguridad;
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entities.TipoEventoSeguridad;
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.repositories.EventoSeguridadRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class EventoSeguridadImplementation implements EventoSeguridadService {
 
     private final EventoSeguridadRepository repository;
