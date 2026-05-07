@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos/layout :: cabeceraComun('Iniciar Sesión')}"></head>
+
+<body class="d-flex flex-column min-vh-100 bg-light">
+<nav th:replace="~{fragmentos/layout :: navbar}"></nav>
+
+<main class="container my-auto">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="card shadow-lg border-0 mt-5">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <h2 class="font-playfair fw-bold">Bienvenido</h2>
+                        <p class="text-muted small">Accede a tu cuenta de Kairos Luxe</p>
+                    </div>
+
+                    <div th:if="${param.error}" class="alert alert-danger role='alert'">
+                        <small>Usuario y/o contraseña incorrectos.</small>
+                    </div>
+
+                    <form th:action="@{/login}" method="post">
+                        <div class="mb-3">
+                            <label for="username" class="form-label small fw-bold">Nombre de usuario</label>
+                            <input type="text" id="username" name="username" class="form-control form-control-lg" placeholder="Tu usuario" required autofocus>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="password" class="form-label small fw-bold">Contraseña</label>
+                            <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="Tu contraseña" required>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg shadow-sm">Entrar</button>
+                        </div>
+                    </form>
+
+                    <div class="text-center mt-4">
+                        <p class="mb-0 small text-muted">¿No tienes cuenta?</p>
+                        <a th:href="@{/register}" class="text-decoration-none fw-bold small text-primary">Regístrate aquí</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="~{fragmentos/layout :: footer}" class="mt-auto"></footer>
+</body>
+</html>
