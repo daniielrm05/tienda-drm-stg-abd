@@ -2,6 +2,7 @@ package es.iesclaradelrey.da2d1a.tiendadrmstgabd.security.model;
 
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entities.Usuario;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -17,7 +18,11 @@ public class UsuarioDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(() -> "ROLE_USER");
+
+        return usuario.getRoles()
+                .stream()
+                .map(rol -> new SimpleGrantedAuthority("ROLE_" + rol))
+                .toList();
     }
 
     @Override
