@@ -89,17 +89,17 @@ VALUES ('user2', 'Salvador', 'Trincado Grande', 'salva@correo.com', '$2a$12$D476
 -- ==========================================
 
 -- 1. Insertamos los roles en la tabla 'rol' (o 'roles', asegúrate de cómo la llamó tu equipo)
---INSERT INTO rol (nombre) VALUES ('ROLE_USER');
---INSERT INTO rol (nombre) VALUES ('ROLE_ADMIN');
+INSERT INTO rol (nombre) VALUES ('ROLE_USER');
+INSERT INTO rol (nombre) VALUES ('ROLE_ADMIN');
 
 -- Asignar ADMIN al usuario 'admin'
---INSERT INTO usuarios_roles (usuario_id, rol_id)
---SELECT u.id, r.id FROM usuario u, rol r WHERE u.username = 'admin' AND r.nombre = 'ROLE_ADMIN';
+INSERT INTO usuarios_roles (usuario_id, rol_id)
+SELECT u.id, r.id FROM usuario u, rol r WHERE u.username = 'admin' AND r.nombre = 'ROLE_ADMIN';
 
 -- Asignar USER a 'cliente1'
--- INSERT INTO usuarios_roles (usuario_id, rol_id)
--- SELECT u.id, r.id FROM usuario u, rol r WHERE u.username = 'cliente1' AND r.nombre = 'ROLE_USER';
+INSERT INTO usuarios_roles (usuario_id, rol_id)
+SELECT u.id, r.id FROM usuario u, rol r WHERE u.username = 'cliente1' AND r.nombre = 'ROLE_USER';
 
 -- Asignar USER a 'user2'
--- INSERT INTO usuarios_roles (usuario_id, rol_id)
--- SELECT u.id, r.id FROM usuario u, rol r WHERE u.username = 'user2' AND r.nombre = 'ROLE_USER';
+INSERT INTO usuarios_roles (usuario_id, rol_id)
+SELECT u.id, r.id FROM usuario u, rol r WHERE u.username = 'user2' AND r.nombre = 'ROLE_USER';
