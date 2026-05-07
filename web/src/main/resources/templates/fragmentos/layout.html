@@ -109,6 +109,9 @@ Copia y pega para su uso: <nav th:replace="~{fragmentos/layout :: navbar}"></nav
 
                     <!-- 2. Si el usuario SÍ está autenticado -->
                     <div th:if="${#authentication != null and #authentication.name != 'anonymousUser'}" class="d-flex align-items-center gap-3">
+                        <a th:href="@{/users/profile}" class="nav-link text-primary me-2">
+                            <i class="bi bi-person-circle"></i> Mi Perfil
+                        </a>
                         <span class="navbar-text text-dark">
                             Hola, <strong th:text="${#authentication.name}">Usuario</strong>
                         </span>

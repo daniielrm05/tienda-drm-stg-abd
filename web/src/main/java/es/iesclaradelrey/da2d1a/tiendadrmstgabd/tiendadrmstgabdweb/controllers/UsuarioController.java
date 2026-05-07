@@ -1,6 +1,7 @@
 package es.iesclaradelrey.da2d1a.tiendadrmstgabd.tiendadrmstgabdweb.controllers;
 
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.dto.UsuarioRegistroDto;
+import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entities.Usuario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,4 +46,11 @@ public class UsuarioController {
 
         return "redirect:/login?success";
     }
+
+    //Provisional para comprobar la vista login
+    @GetMapping("/login")
+    public String login() {
+        return "usuarios/login"; // Esto busca src/main/resources/templates/login.html
+    }
+
 }
