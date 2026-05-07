@@ -2,44 +2,64 @@ package es.iesclaradelrey.da2d1a.tiendadrmstgabd.tiendadrmstgabdweb.controllers;
 
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.dto.UsuarioRegistroDto;
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entities.Usuario;
+import es.iesclaradelrey.da2d1a.tiendadrmstgabd.services.UsuarioService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDateTime;
+
 @Controller
 public class UsuarioController {
-    /*
-    private final UsuarioService usuarioService;       COMENTADO HASTA QUE SE CREE SERVICIO
 
-    public UsuarioController(UsuarioService usuarioService) {
+    private final UsuarioService usuarioService;
+    private final PasswordEncoder passwordEncoder;
+
+    public UsuarioController(UsuarioService usuarioService, PasswordEncoder passwordEncoder) {
         this.usuarioService = usuarioService;
-    }*/
+        this.passwordEncoder = passwordEncoder;
+    }
 
-
+    // Muestra el formulario de registro
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
-        // Aquí es donde "nace" el objeto que espera el HTML
-        // El nombre "usuarioDto" debe coincidir exactamente con el th:object del HTML
         model.addAttribute("usuarioRegistroDto", new UsuarioRegistroDto());
-
         return "usuarios/register";
     }
 
+    // Procesa el formulario de registro
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("usuarioRegistroDto") UsuarioRegistroDto registroDto, Model model) {
 
-        // Validar el checkbox
+        // Si no acepta condiciones, volvemos al formulario con error
         if (!registroDto.isAceptaCondiciones()) {
+            model.addAttribute("usuarioRegistroDto", registroDto);
             model.addAttribute("error", "Debes aceptar las condiciones para registrarte.");
             return "usuarios/register";
         }
 
         try {
-            //usuarioService.registrar(registroDto); COMENTADO HASTA QUE SE CREE SERVICIO
+            // Construimos la entidad Usuario desde el DTO
+            Usuario usuario = new Usuario();
+            usuario.setUsername(registroDto.getUsername());
+            usuario.setNombre(registroDto.getNombre());
+            usuario.setApellidos(registroDto.getApellidos());
+            usuario.setEmail(registroDto.getEmail());
+            usuario.setTelefono(registroDto.getTelefono());
+            usuario.setFechaNacimiento(registroDto.getFechaNacimiento());
+            // Codificamos la contraseña con bcrypt antes de guardarla
+            usuario.setPassword(passwordEncoder.encode(registroDto.getPassword()));
+            // La fecha de registro la asigna el servidor automáticamente
+            usuario.setFechaRegistro(LocalDateTime.now());
+
+            usuarioService.guardar(usuario);
+
         } catch (Exception e) {
-            // Si el email ya existe o hay un error, volvemos al formulario
+            // Si hay error (email o username duplicado, etc.) volvemos al formulario
+            model.addAttribute("usuarioRegistroDto", registroDto);
             model.addAttribute("error", "Error al registrar: " + e.getMessage());
             return "usuarios/register";
         }
@@ -47,10 +67,9 @@ public class UsuarioController {
         return "redirect:/login?success";
     }
 
-    //Provisional para comprobar la vista login
+    // Muestra el formulario de login
     @GetMapping("/login")
     public String login() {
-        return "usuarios/login"; // Esto busca src/main/resources/templates/login.html
+        return "usuarios/login";
     }
-
 }

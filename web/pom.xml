@@ -6,7 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>4.0.5</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>es.iesclaradelrey.da2d1a.tienda-drm-stg-abd</groupId>
     <artifactId>tienda-drm-stg-abd-web</artifactId>
@@ -63,6 +63,13 @@
         <dependency>
             <groupId>es.iesclaradelrey.da2d1a.tienda-drm-stg-abd</groupId>
             <artifactId>tienda-drm-stg-abd-common</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Módulo de seguridad -->
+        <dependency>
+            <groupId>es.iesclaradelrey.da2d1a.tienda-drm-stg-abd</groupId>
+            <artifactId>security</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
