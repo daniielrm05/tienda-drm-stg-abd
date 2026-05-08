@@ -2,10 +2,13 @@ package es.iesclaradelrey.da2d1a.tiendadrmstgabd.tiendadrmstgabdweb.controllers;
 
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.dto.UsuarioRegistroDto;
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entities.Usuario;
+import es.iesclaradelrey.da2d1a.tiendadrmstgabd.repositories.RolRepository;
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.services.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,11 +19,13 @@ import java.time.LocalDateTime;
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
+    private final RolRepository rolRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UsuarioController(UsuarioService usuarioService, PasswordEncoder passwordEncoder) {
+    public UsuarioController(UsuarioService usuarioService, PasswordEncoder passwordEncoder, RolRepository rolRepository) {
         this.usuarioService = usuarioService;
         this.passwordEncoder = passwordEncoder;
+        this.rolRepository = rolRepository;
     }
 
     // Muestra el formulario de registro
@@ -32,7 +37,11 @@ public class UsuarioController {
 
     // Procesa el formulario de registro
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute("usuarioRegistroDto") UsuarioRegistroDto registroDto, Model model) {
+    public String registerUser(@Valid @ModelAttribute("usuarioRegistroDto") UsuarioRegistroDto registroDto, BindingResult result, Model model) {
+
+        if (result.hasErrors()) {
+            return "usuarios/register";
+        }
 
         // Si no acepta condiciones, volvemos al formulario con error
         if (!registroDto.isAceptaCondiciones()) {
@@ -54,6 +63,9 @@ public class UsuarioController {
             usuario.setPassword(passwordEncoder.encode(registroDto.getPassword()));
             // La fecha de registro la asigna el servidor automáticamente
             usuario.setFechaRegistro(LocalDateTime.now());
+            rolRepository.findById("USER").ifPresent(rol -> {
+                usuario.getRoles().add(rol);
+            });
 
             usuarioService.guardar(usuario);
 

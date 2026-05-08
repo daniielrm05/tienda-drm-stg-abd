@@ -29,7 +29,7 @@
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Nombre de usuario</label>
                                 <input type="text" th:field="*{username}" class="form-control"
-                                       th:classappend="${#fields.hasErrors('username')} ? 'is-invalid' : ''" required>
+                                       th:classappend="${#fields.hasErrors('username')} ? 'is-invalid' : ''">
                                 <div class="invalid-feedback" th:errors="*{username}">Error</div>
                             </div>
 
@@ -37,7 +37,7 @@
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Contraseña</label>
                                 <input type="password" th:field="*{password}" class="form-control"
-                                       th:classappend="${#fields.hasErrors('password')} ? 'is-invalid' : ''" required>
+                                       th:classappend="${#fields.hasErrors('password')} ? 'is-invalid' : ''">
                                 <div class="invalid-feedback" th:errors="*{password}">Error</div>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Nombre</label>
                                 <input type="text" th:field="*{nombre}" class="form-control"
-                                       th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ''" required>
+                                       th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ''">
                                 <div class="invalid-feedback" th:errors="*{nombre}">Error</div>
                             </div>
 
@@ -55,7 +55,7 @@
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Apellidos</label>
                                 <input type="text" th:field="*{apellidos}" class="form-control"
-                                       th:classappend="${#fields.hasErrors('apellidos')} ? 'is-invalid' : ''" required>
+                                       th:classappend="${#fields.hasErrors('apellidos')} ? 'is-invalid' : ''">
                                 <div class="invalid-feedback" th:errors="*{apellidos}">Error</div>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                         <div class="mb-3">
                             <label class="form-label">Correo electrónico</label>
                             <input type="email" th:field="*{email}" class="form-control"
-                                   th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : ''" placeholder="ejemplo@correo.com" required>
+                                   th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : ''" placeholder="ejemplo@correo.com" >
                             <div class="invalid-feedback" th:errors="*{email}">Error</div>
                         </div>
 
@@ -78,7 +78,9 @@
                             <!-- Fecha Nacimiento (Opcional)[cite: 3] -->
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Fecha de nacimiento</label>
-                                <input type="date" th:field="*{fechaNacimiento}" class="form-control">
+                                <input type="date" th:field="*{fechaNacimiento}" class="form-control"
+                                       th:classappend="${#fields.hasErrors('fechaNacimiento')} ? 'is-invalid' : ''">
+                                <div class="invalid-feedback" th:errors="*{fechaNacimiento}">Error</div>
                             </div>
                         </div>
 

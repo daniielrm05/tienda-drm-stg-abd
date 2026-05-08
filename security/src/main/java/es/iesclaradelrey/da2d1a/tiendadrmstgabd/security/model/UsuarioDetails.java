@@ -21,7 +21,7 @@ public class UsuarioDetails implements UserDetails {
 
         return usuario.getRoles()
                 .stream()
-                .map(rol -> new SimpleGrantedAuthority("ROLE_" + rol))
+                .map(rol -> new SimpleGrantedAuthority("ROLE_" + rol.getId()))
                 .toList();
     }
 

@@ -72,34 +72,34 @@ VALUES (
         'Admin',
         'Sistema',
         'admin@tienda.com',
-        '$2a$12$D476zB.F6NInWnpL98X9beH6G1eH/1Z516Yv32zT83D.O2Ym0NfMa',
+        '$2a$12$yQ9W7.u83me8bQVHi.q3uuVAUNXRQpgk37L3qQaQJenlSDw9CgV02',
         CURRENT_TIMESTAMP
        );
 
 -- Usuario Normal 1 (Cliente estándar)
 INSERT INTO usuario (username, nombre, apellidos, email, password, fecha_registro)
-VALUES ('cliente1', 'Dani', 'Ruiz Magro', 'dani@correo.com', '$2a$12$D476zB.F6NInWnpL98X9beH6G1eH/1Z516Yv32zT83D.O2Ym0NfMa', CURRENT_TIMESTAMP);
+VALUES ('cliente1', 'Dani', 'Ruiz Magro', 'dani@correo.com', '$2a$12$yQ9W7.u83me8bQVHi.q3uuVAUNXRQpgk37L3qQaQJenlSDw9CgV02', CURRENT_TIMESTAMP);
 
 -- Usuario Normal 2 (Otro cliente)
 INSERT INTO usuario (username, nombre, apellidos, email, password, fecha_registro)
-VALUES ('user2', 'Salvador', 'Trincado Grande', 'salva@correo.com', '$2a$12$D476zB.F6NInWnpL98X9beH6G1eH/1Z516Yv32zT83D.O2Ym0NfMa', CURRENT_TIMESTAMP);
+VALUES ('user2', 'Salvador', 'Trincado Grande', 'salva@correo.com', '$2a$12$yQ9W7.u83me8bQVHi.q3uuVAUNXRQpgk37L3qQaQJenlSDw9CgV02', CURRENT_TIMESTAMP);
 
 -- ==========================================
 -- 5. ROLES Y ASIGNACIONES
 -- ==========================================
 
--- 1. Insertamos los roles en la tabla 'rol' (o 'roles', asegúrate de cómo la llamó tu equipo)
-INSERT INTO rol (nombre) VALUES ('ROLE_USER');
-INSERT INTO rol (nombre) VALUES ('ROLE_ADMIN');
+-- 1. Insertamos los roles en la tabla 'rol'
+INSERT INTO rol (id, descripcion) VALUES ('ADMIN', 'Rol con permisos totales de administracion');
+INSERT INTO rol (id, descripcion) VALUES ('USER', 'Rol para clientes estandar de la tienda');
 
 -- Asignar ADMIN al usuario 'admin'
-INSERT INTO usuarios_roles (usuario_id, rol_id)
-SELECT u.id, r.id FROM usuario u, rol r WHERE u.username = 'admin' AND r.nombre = 'ROLE_ADMIN';
+INSERT INTO usuario_roles (usuarios, rol_id)
+VALUES ((SELECT id FROM usuario WHERE username = 'admin'), 'ADMIN');
 
 -- Asignar USER a 'cliente1'
-INSERT INTO usuarios_roles (usuario_id, rol_id)
-SELECT u.id, r.id FROM usuario u, rol r WHERE u.username = 'cliente1' AND r.nombre = 'ROLE_USER';
+INSERT INTO usuario_roles (usuarios, rol_id)
+VALUES ((SELECT id FROM usuario WHERE username = 'cliente1'), 'USER');
 
 -- Asignar USER a 'user2'
-INSERT INTO usuarios_roles (usuario_id, rol_id)
-SELECT u.id, r.id FROM usuario u, rol r WHERE u.username = 'user2' AND r.nombre = 'ROLE_USER';
+INSERT INTO usuario_roles (usuarios, rol_id)
+VALUES ((SELECT id FROM usuario WHERE username = 'user2'), 'USER');
