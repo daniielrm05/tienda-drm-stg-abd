@@ -18,6 +18,7 @@
         <module>common</module>
         <module>web</module>
         <module>security</module>
+        <module>api</module>
     </modules>
 
     <properties>
