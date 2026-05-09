@@ -45,7 +45,7 @@ public class SecurityConfig {
                 // Puerta cerrada para el resto: categorías, productos, carrito...
                 // Si no envían el "Authorization: Bearer <token>", Spring lanza el 401
                 .anyRequest().authenticated()
-        );
+        )
 
         .authenticationProvider(authenticationProvider)
         // AÑADIR EL FILTRO JWT ANTES DEL DE USUARIO/PASSWORD
