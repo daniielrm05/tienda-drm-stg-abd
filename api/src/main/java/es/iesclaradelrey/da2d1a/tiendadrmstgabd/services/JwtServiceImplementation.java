@@ -7,6 +7,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -14,7 +15,7 @@ import java.util.Date;
 import java.util.function.Function;
 
 @Service
-public class JwrServiceImplementation implements JwtService{
+public class JwtServiceImplementation implements JwtService{
 
     @Value("${api.security.jwt.secret-key}")
     private String secretKey;
@@ -51,7 +52,7 @@ public class JwrServiceImplementation implements JwtService{
     }
 
     @Override
-    public Boolean isTokenValid(String token, UsuarioDetails user) {
+    public Boolean isTokenValid(String token, UserDetails user) {
         final String username = extractUsername(token);
         return (username.equals(user.getUsername())) && !isTokenExpired(token);
     }
