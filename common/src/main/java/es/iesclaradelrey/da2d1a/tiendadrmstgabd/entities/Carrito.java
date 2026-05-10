@@ -1,8 +1,11 @@
 package es.iesclaradelrey.da2d1a.tiendadrmstgabd.entities;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
@@ -14,6 +17,10 @@ import java.time.LocalDate;
                 )
         }
 )
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Carrito {
 
     @Id
@@ -32,5 +39,4 @@ public class Carrito {
     private int unidades;
 
     private LocalDate fecha;
-
 }
