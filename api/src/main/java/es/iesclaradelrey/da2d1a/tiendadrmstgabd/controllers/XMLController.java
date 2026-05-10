@@ -3,11 +3,12 @@ package es.iesclaradelrey.da2d1a.tiendadrmstgabd.controllers;
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entities.CategoriaReloj;
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entities.Reloj;
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.services.RelojService;
+import es.iesclaradelrey.da2d1a.tiendadrmstgabd.services.XmlImportService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -27,9 +28,11 @@ import java.util.Collection;
 public class XMLController {
 
     private final RelojService relojService;
+    private final XmlImportService xmlImportService;
 
-    public XMLController(RelojService relojService) {
+    public XMLController(RelojService relojService, XmlImportService xmlImportService) {
         this.relojService = relojService;
+        this.xmlImportService = xmlImportService;
     }
 
     @GetMapping("/api/v1/xml")
@@ -211,5 +214,13 @@ public class XMLController {
                         MediaType.APPLICATION_XML
                 )
                 .body(xmlBytes);
+    }
+
+    // Importación de productos desde XML usando SAX
+    @PostMapping("/api/v1/xml")
+    public ResponseEntity<Void> importarProductos(
+            @RequestParam("productsfile") MultipartFile file) throws Exception {
+        xmlImportService.importarDesdeXml(file);
+        return ResponseEntity.ok().build();
     }
 }
