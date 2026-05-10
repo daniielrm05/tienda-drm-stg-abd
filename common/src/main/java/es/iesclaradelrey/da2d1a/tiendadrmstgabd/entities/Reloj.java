@@ -40,6 +40,8 @@ public class Reloj {
     @Positive                                           //solo valores positivos
     private Double precio;
 
+    private Integer stock;
+
     @NotNull                                            //obligatorio
     @Min(0)                                             //mínimo 0
     @Max(99)                                            //máximo 99
