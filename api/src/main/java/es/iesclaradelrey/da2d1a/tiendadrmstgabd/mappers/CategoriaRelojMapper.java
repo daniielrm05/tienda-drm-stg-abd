@@ -1,6 +1,6 @@
 package es.iesclaradelrey.da2d1a.tiendadrmstgabd.mappers;
 
-import es.iesclaradelrey.da2d1a.tiendadrmstgabd.dto.CategoriaRelojDto;
+import es.iesclaradelrey.da2d1a.tiendadrmstgabd.dtos.CategoriaRelojDto;
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entities.CategoriaReloj;
 import org.mapstruct.Mapper;
 import java.util.List;

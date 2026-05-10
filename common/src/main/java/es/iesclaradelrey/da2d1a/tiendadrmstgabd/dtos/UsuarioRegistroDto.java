@@ -1,4 +1,4 @@
-package es.iesclaradelrey.da2d1a.tiendadrmstgabd.dto;
+package es.iesclaradelrey.da2d1a.tiendadrmstgabd.dtos;
 
 import jakarta.validation.constraints.*;
 import lombok.Getter;

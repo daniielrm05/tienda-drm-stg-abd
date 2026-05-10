@@ -1,6 +1,6 @@
 package es.iesclaradelrey.da2d1a.tiendadrmstgabd.tiendadrmstgabdweb.controllers;
 
-import es.iesclaradelrey.da2d1a.tiendadrmstgabd.dto.UsuarioRegistroDto;
+import es.iesclaradelrey.da2d1a.tiendadrmstgabd.dtos.UsuarioRegistroDto;
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.entities.Usuario;
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.repositories.RolRepository;
 import es.iesclaradelrey.da2d1a.tiendadrmstgabd.services.UsuarioService;
