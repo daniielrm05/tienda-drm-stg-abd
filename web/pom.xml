@@ -47,7 +47,7 @@
         <!-- Módulo de seguridad -->
         <dependency>
             <groupId>es.iesclaradelrey.da2d1a.tienda-drm-stg-abd</groupId>
-            <artifactId>security</artifactId>
+            <artifactId>tienda-drm-stg-abd-security</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
