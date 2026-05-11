@@ -34,13 +34,23 @@ public class XmlImportService {
     public void importarDesdeXml(MultipartFile file) throws Exception {
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser saxParser = factory.newSAXParser();
-        RelojHandler handler = new RelojHandler();
+        RelojHandler handler = new RelojHandler(relojRepository, marcaRepository, categoriaRepository);
         saxParser.parse(file.getInputStream(), handler);
     }
 
     private class RelojHandler extends DefaultHandler {
+        private final RelojRepository relojRepository;
+        private final MarcaRepository marcaRepository;
+        private final CategoriaRelojRepository categoriaRepository;
+
         private StringBuilder valorActual = new StringBuilder();
         private Reloj relojActual;
+
+        public RelojHandler(RelojRepository relojRepository, MarcaRepository marcaRepository, CategoriaRelojRepository categoriaRepository) {
+            this.relojRepository = relojRepository;
+            this.marcaRepository = marcaRepository;
+            this.categoriaRepository = categoriaRepository;
+        }
 
         @Override
         public void startElement(String uri, String localName, String qName, Attributes attributes) {
@@ -49,9 +59,10 @@ public class XmlImportService {
             if (qName.equalsIgnoreCase("product")) {
                 relojActual = new Reloj();
                 relojActual.setCategorias(new ArrayList<>());
+                relojActual.setCodigo("IMPORT-" + System.currentTimeMillis());
             }
 
-            // LEER ID DE MARCA DESDE EL ATRIBUTO (Como hizo Andriy)
+            // LEER ID DE MARCA DESDE EL ATRIBUTO
             else if (qName.equalsIgnoreCase("marca") && relojActual != null) {
                 String idStr = attributes.getValue("id");
                 if (idStr != null) {
@@ -84,9 +95,13 @@ public class XmlImportService {
             if (relojActual == null) return;
 
             switch (qName.toLowerCase()) {
-                case "nombre" -> relojActual.setNombre(valorActual.toString());
-                case "precio" -> relojActual.setPrecio(Double.parseDouble(valorActual.toString()));
-                case "stock"  -> relojActual.setStock(Integer.parseInt(valorActual.toString()));
+                case "nombre"      -> relojActual.setNombre(valorActual.toString());
+                case "precio"      -> relojActual.setPrecio(Double.parseDouble(valorActual.toString()));
+                case "stock"       -> relojActual.setStock(Integer.parseInt(valorActual.toString()));
+                // AÑADE ESTOS TRES:
+                case "codigo"      -> relojActual.setCodigo(valorActual.toString());
+                case "descripcion" -> relojActual.setDescripcion(valorActual.toString());
+                case "descuento"   -> relojActual.setDescuento(Integer.parseInt(valorActual.toString()));
 
                 case "product" -> {
                     relojRepository.save(relojActual);

@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -28,7 +29,12 @@ public class SecurityConfig {
         http
 
         // 1. Desactivar CSRF (Requisito para APIs REST con JWT)
+       // .csrf(AbstractHttpConfigurer::disable)
+        // 1. Desactivar CSRF (Importante: para H2 también suele dar guerra)
         .csrf(AbstractHttpConfigurer::disable)
+
+        // Permitir que se muestre la consola en un frame
+        .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
 
         // 2. Sesiones STATELESS: No se guarda sesión en el servidor
         .sessionManagement(session ->
@@ -37,11 +43,14 @@ public class SecurityConfig {
 
         // 3. Configuración de URLs permitidas (Whitelisting)
         .authorizeHttpRequests(auth -> auth
+                // Permitir consola H2 (Ruta por defecto)
+                .requestMatchers("/h2-console/**").permitAll()
                 // Permitimos las URLs de autenticación (Login y Refresh)
                 // Estas se usaran controlador de Auth
                 // Única puerta abierta: para loguearse
                 .requestMatchers("/api/v1/auth/**").permitAll()
-
+                // Recursos estáticos básicos
+                .requestMatchers("/favicon.ico", "/error/**").permitAll()
                 // Puerta cerrada para el resto: categorías, productos, carrito...
                 // Si no envían el "Authorization: Bearer <token>", Spring lanza el 401
                 .anyRequest().authenticated()
@@ -53,5 +62,4 @@ public class SecurityConfig {
 
         return http.build();
     }
-
 }
